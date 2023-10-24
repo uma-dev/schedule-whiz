@@ -29,6 +29,8 @@ Here is a mockup of the user interface:
 - [ ] As an employee I want to login in the app with the credentials from my pc.
 - [ ] As a user I want to easily register my assistance.
 
+![Spring 1](./images/sprint-1.png)
+
 ## Getting Started
 
 To get started with this project, follow these steps:

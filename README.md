@@ -16,7 +16,7 @@ You can find the project's backlog in the [Backlog](./images/backlog.png) image.
 
 The database schema for this project can be found in the [Database Design](./images/database-design.png) image.
 
-![Database Design](./images/database-design.png)
+![Database Design](./images/schedule-whiz-db.png)
 
 ## User Interface Mockup
 

@@ -1,3 +1,8 @@
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 # Emacs/vim
 
 *~
@@ -13,6 +18,20 @@
 # IntelliJ
 
 .idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 # MacOS
 

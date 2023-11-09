@@ -3,6 +3,7 @@ HELP.md
 !**/src/main/**/target/
 !**/src/test/**/target/
 env.properties
+.factorypath
 
 # Emacs/vim
 

@@ -1,9 +1,11 @@
+
 -- Generate ScheduleWhiz sample database
 
 DROP SCHEMA IF EXISTS "schedule-whiz-v1" CASCADE;
 CREATE SCHEMA "schedule-whiz-v1";
 
 BEGIN;
+
 
 CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Employees"
 (
@@ -39,15 +41,17 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Records"
 (
     record_id serial NOT NULL,
     employee serial NOT NULL,
-    start_time timestamp with time zone NOT NULL,
-    end_time timestamp with time zone NOT NULL,
-    PRIMARY KEY (record_id)
+    created timestamp with time zone NOT NULL,
+    schedule_id serial NOT NULL,
+    issue_id integer,
+    PRIMARY KEY (record_id),
+    UNIQUE (schedule_id),
+    UNIQUE (issue_id)
 );
 
 CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Issues"
 (
     issue_id serial NOT NULL,
-    record serial NOT NULL,
     issue_status serial NOT NULL,
     delay time without time zone,
     description character varying(280),
@@ -93,9 +97,17 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS "schedule-whiz-v1"."Issues"
-    ADD FOREIGN KEY (record)
-    REFERENCES "schedule-whiz-v1"."Records" (record_id) MATCH SIMPLE
+ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
+    ADD FOREIGN KEY (issue_id)
+    REFERENCES "schedule-whiz-v1"."Issues" (issue_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
+    ADD FOREIGN KEY (schedule_id)
+    REFERENCES "schedule-whiz-v1"."Schedules" (schedule_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -109,7 +121,6 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Issues"
     NOT VALID;
 
 END;
-
 
 -- Populate database
 
@@ -185,4 +196,3 @@ VALUES
 	('Antonio', 'Clark', 'Clark', 4, 4),
 	('Isabel', 'Clark', 'Clark', 5, 5),
 	('Rosa', 'Lopez', 'Lopez', 7, 7);
-

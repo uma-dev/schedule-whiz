@@ -18,6 +18,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 
 @Table(name =  "`Schedules`")
 

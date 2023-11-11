@@ -3,6 +3,7 @@ package com.umadev.schedulewhiz.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 
 @Table(name = "`Records`") 
 
@@ -29,21 +31,25 @@ public class Record {
     @Column(name="record_id")
     private Integer id;
 
-    //@Column(name="employee")
-    //private Employee employee;
+    // Bidirectional relationship
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+                        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="fk_employee")
+    private Employee employee;
 
-    @Column(name="created")
-    private OffsetDateTime startTime;
-   
-    // All operations aplied to employee will cascade with schedule 
-   /* @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schedule_id")
+    // Unidirectional relationship
+    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+                        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "fk_schedule")
     private Schedule schedule;
 
-    // All operations aplied to employee will cascade with issue 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schedule_id")
-    @JoinColumn(name = "issue_id")
+    // Unidirectional relationship  
+    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+                        CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "fk_issue")
     private Issue issue;
-    */
+    
+    @Column(name="created")
+    private OffsetDateTime startTime;
 }
+

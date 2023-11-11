@@ -16,6 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 
 @Table(name = "`Teams`")
 
@@ -28,5 +29,4 @@ public class Team {
     
     @Column(name="name")
     private String name;
-
 }

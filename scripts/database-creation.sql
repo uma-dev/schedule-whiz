@@ -1,4 +1,3 @@
-
 -- Generate ScheduleWhiz sample database
 
 DROP SCHEMA IF EXISTS "schedule-whiz-v1" CASCADE;
@@ -6,16 +5,15 @@ CREATE SCHEMA "schedule-whiz-v1";
 
 BEGIN;
 
-
 CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Employees"
 (
     employee_id serial NOT NULL,
     names character varying(50) NOT NULL,
     first_surname character varying(50) NOT NULL,
     second_surname character varying(50) NOT NULL,
-    schedule integer,
-    team serial NOT NULL,
-    managed_team integer,
+    fk_schedule integer,
+    fk_team serial NOT NULL,
+    fk_managed_team integer,
     CONSTRAINT "Employees_pkey" PRIMARY KEY (employee_id)
 );
 
@@ -40,19 +38,19 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Teams"
 CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Records"
 (
     record_id serial NOT NULL,
-    employee serial NOT NULL,
+    fk_employee serial NOT NULL,
     created timestamp with time zone NOT NULL,
-    schedule_id serial NOT NULL,
-    issue_id integer,
+    fk_schedule serial NOT NULL,
+    fk_issue integer,
     PRIMARY KEY (record_id),
-    UNIQUE (schedule_id),
-    UNIQUE (issue_id)
+    UNIQUE (fk_schedule),
+    UNIQUE (fk_issue)
 );
 
 CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Issues"
 (
     issue_id serial NOT NULL,
-    issue_status serial NOT NULL,
+    fk_issue_status serial NOT NULL,
     delay time without time zone,
     description character varying(280),
     PRIMARY KEY (issue_id)
@@ -66,7 +64,7 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Issue_statuses"
 );
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
-    ADD FOREIGN KEY (team)
+    ADD FOREIGN KEY (fk_team)
     REFERENCES "schedule-whiz-v1"."Teams" (team_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -74,7 +72,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
-    ADD FOREIGN KEY (schedule)
+    ADD FOREIGN KEY (fk_schedule)
     REFERENCES "schedule-whiz-v1"."Schedules" (schedule_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -82,7 +80,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
-    ADD FOREIGN KEY (managed_team)
+    ADD FOREIGN KEY (fk_managed_team)
     REFERENCES "schedule-whiz-v1"."Teams" (team_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -90,7 +88,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
-    ADD FOREIGN KEY (employee)
+    ADD FOREIGN KEY (fk_employee)
     REFERENCES "schedule-whiz-v1"."Employees" (employee_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -98,7 +96,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
-    ADD FOREIGN KEY (issue_id)
+    ADD FOREIGN KEY (fk_issue)
     REFERENCES "schedule-whiz-v1"."Issues" (issue_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -106,7 +104,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
-    ADD FOREIGN KEY (schedule_id)
+    ADD FOREIGN KEY (fk_schedule)
     REFERENCES "schedule-whiz-v1"."Schedules" (schedule_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -114,7 +112,7 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
 
 
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Issues"
-    ADD FOREIGN KEY (issue_status)
+    ADD FOREIGN KEY (fk_issue_status)
     REFERENCES "schedule-whiz-v1"."Issue_statuses" (issue_status_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -164,7 +162,7 @@ VALUES
 	('10:00-18:30', '09:30:00-06:00', '18:00:00-06:00', 2, 0);
 
 -- Add employees
-INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, team)
+INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, fk_team)
 VALUES
  	('John', 'Doe', 'Smith', 1),
  	('Jane', 'Johnson', 'Williams', 2),
@@ -188,7 +186,7 @@ VALUES
   	('Karen', 'Baker', 'Clark', 5);
  
 -- Add managers
-INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, team, managed_team)
+INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, fk_team, fk_managed_team)
 VALUES
  	('Jose', 'Smith', 'Smith', 1, 1),
  	('Luis', 'White', 'White', 2, 2),

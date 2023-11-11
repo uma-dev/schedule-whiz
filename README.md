@@ -36,10 +36,11 @@ Here is a mockup of the user interface:
 To get started with this project, follow these steps:
 
 1. Clone the repository.
-2. Configure your database settings in `application.properties`.
-3. Run the Spring Boot application.
-4. Access the application through a web browser.
-5. Begin optimizing schedules for your team!
+2. Setup the database with the provided DDL in `/scripts` folder (PostgreSQL).
+3. Configure your database settings in `application.properties` and `env.properties` (see `env.properties.example`).
+4. Run the Spring Boot application.
+5. Access the application through a web browser.
+6. Begin optimizing schedules for your team!
 
 ## Prerequisites
 

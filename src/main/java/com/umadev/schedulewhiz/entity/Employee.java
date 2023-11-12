@@ -49,8 +49,8 @@ public class Employee {
     private Schedule schedule;
     
     // Bidirectional one to many
-    @ManyToOne( cascade={CascadeType.PERSIST, CascadeType.MERGE,
-                         CascadeType.DETACH, CascadeType.REFRESH} )
+    @ManyToOne//( cascade={CascadeType.MERGE,
+              //           CascadeType.DETACH, CascadeType.REFRESH} )
     @JoinColumn(name="fk_team")
     @ToString.Exclude   
     private Team team;

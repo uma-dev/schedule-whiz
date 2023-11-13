@@ -1,5 +1,6 @@
 package com.umadev.schedulewhiz.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ public class EmployeeController {
 
     private EmployeeService employeeService;
 
+    @Autowired
     public EmployeeController(EmployeeService theEmployeeService){
         this.employeeService = theEmployeeService;
     }

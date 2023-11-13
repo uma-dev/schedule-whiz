@@ -7,7 +7,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -42,22 +41,19 @@ public class Employee {
     private String secondSurname;
 
     // Unidirectional one to many
-    @ManyToOne( cascade={CascadeType.PERSIST, CascadeType.MERGE,
-                         CascadeType.DETACH, CascadeType.REFRESH} )
+    @ManyToOne
     @JoinColumn(name="fk_schedule")
     @ToString.Exclude   
     private Schedule schedule;
     
     // Bidirectional one to many
-    @ManyToOne//( cascade={CascadeType.MERGE,
-              //           CascadeType.DETACH, CascadeType.REFRESH} )
+    @ManyToOne
     @JoinColumn(name="fk_team")
     @ToString.Exclude   
     private Team team;
   
     // Unidirectional one to one
-    @OneToOne( cascade={CascadeType.PERSIST, CascadeType.MERGE, 
-                         CascadeType.DETACH, CascadeType.REFRESH} )
+    @OneToOne 
     @JoinColumn(name="fk_managed_team")
     @ToString.Exclude   
     private Team managedTeam;

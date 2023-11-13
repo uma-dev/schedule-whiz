@@ -7,5 +7,5 @@ import com.umadev.schedulewhiz.entity.Record;
 
 public interface EmployeeService {
     //List<Record> findAllRecords(); 
-    public Employee save(Employee theEmployee);
+    Employee save(Employee theEmployee);
 }

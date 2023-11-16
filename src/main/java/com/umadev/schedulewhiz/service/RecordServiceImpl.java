@@ -22,4 +22,9 @@ public class RecordServiceImpl implements RecordService {
     public List<Record> findbyEmployeeId(Integer recordId){
         return recordRepository.findByEmployeeId(recordId);
     }
+
+    @Override 
+    public Record saveRecord(Record theRecord){
+        return recordRepository.save(theRecord); 
+    }
 } 

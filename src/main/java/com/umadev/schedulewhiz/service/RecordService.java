@@ -8,4 +8,5 @@ import com.umadev.schedulewhiz.entity.Record;
 public interface RecordService {
 
     List<Record> findbyEmployeeId(Integer employeeId);
+    Record saveRecord(Record theRecord);
 }

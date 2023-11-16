@@ -32,20 +32,20 @@ public class Record {
     private Integer id;
 
     // Bidirectional relationship
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
-                        CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne //(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+               //         CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="fk_employee")
     private Employee employee;
 
     // Unidirectional relationship
-    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
-                        CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToOne//(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+             //           CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "fk_schedule")
     private Schedule schedule;
 
     // Unidirectional relationship  
-    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
-                        CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToOne//(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+             //           CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "fk_issue")
     private Issue issue;
     

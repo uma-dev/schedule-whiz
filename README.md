@@ -22,7 +22,7 @@ The database schema for this project can be found in the [Database Design](./ima
 
 Here is a mockup of the user interface:
 
-![User Interface Mockup](./images/ui-mockup.png)
+![User Interface Mockup](./images/dashboard.png)
 
 ## Sprint 1 (MVP part 1)
 

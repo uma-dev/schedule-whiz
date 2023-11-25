@@ -1,18 +1,35 @@
 const Navbar = () => {
-    return (
-        <div className="flex flex-col gap-12 bg-[#0C0B0B] rounded-lg text-slate-400 h-full p-8"> 
-            <h1 className="flex flex-col text-3xl text-slate-50">Schedule  
-                <span className="text-yellow-300"> Whiz</span>
-            </h1>
-            <ul className="flex flex-col justify-between gap-12 text-base">
-                <li>Dashboard</li>
-                <li>My Team</li>
-                <li>Settings</li>
-            </ul>
+  return (
+    <div className="flex flex-col bg-black-stone rounded-xl h-full p-8 justify-between shadow-2xl">
+      <div className="flex flex-col gap-12">
+          <h1 className="flex flex-col text-3xl text-white">
+            Schedule
+            <span className="text-yellow-schedulewhiz"> Whiz</span>
+          </h1>
 
-            <span>Logout</span>
+          <ul className="flex flex-col gap-12 text-base">
+            <li className="flex gap-1 text-white/70 hover:text-white items-center ">
+              <i className="bx bxs-dashboard bx-sm"></i>
+              Dashboard
+            </li>
+            <li className="flex gap-1 text-white/70 hover:text-white items-center">
+              <i className="bx bxs-group bx-sm"></i>
+              My Team
+            </li>
+            <li className="flex gap-1 text-white/70 hover:text-white items-center">
+              <i className="bx bxs-cog bx-sm"></i>
+              Settings
+            </li>
+          </ul>
+      </div>
+            
+        <div className="flex gap-1 text-white/70 hover:text-white items-center">
+          <i className="bx bxs-log-out bx-sm"></i>
+         Logout 
         </div>
-    );
-}
+
+    </div>
+  );
+};
 
 export default Navbar;

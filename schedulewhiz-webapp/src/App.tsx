@@ -1,9 +1,11 @@
-import Grid from './components/Grid';
+import Grid from "./components/Grid";
 
 function App() {
-    return (
-        <Grid />
-    ); 
+  return (
+    <div className="bg-slate-100 px-12">
+      <Grid />
+    </div>
+  );
 }
 
-export default App
+export default App;

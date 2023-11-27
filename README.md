@@ -22,7 +22,13 @@ The database schema for this project can be found in the [Database Design](./ima
 
 Here is a mockup of the user interface:
 
+### Dashboard
+
 ![User Interface Mockup](./images/dashboard.png)
+
+### Login
+
+![Login](./images/login.png)
 
 ## Sprint 1 (MVP part 1)
 
@@ -58,7 +64,7 @@ Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUT
 - [x] Create the database schema.
 - [ ] Implement user authentication.
 - [ ] Design the scheduling algorithm.
-- [ ] Develop the user interface.
+- [x] Develop the user interface.
 - [ ] Integrate flexibility and remote work features.
 - [ ] Test and optimize the system.
 - [ ] Document the project.

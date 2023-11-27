@@ -1,10 +1,15 @@
-import Grid from "./components/Grid";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/dashboard/Dashboard";
+import Login from "./components/login/Login";
 
 function App() {
   return (
-    <div className="bg-slate-100 px-12">
-      <Grid />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

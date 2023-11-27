@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Card = ({ children, color }: Props) => {
-  console.log(color);
   return (
     <div className={`bg-${color} h-fit rounded-xl p-7 shadow-lg`}>
       {children}

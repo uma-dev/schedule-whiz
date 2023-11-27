@@ -1,5 +1,5 @@
 import Card from "./Card";
-import logo from "../assets/logo.png";
+import logo from "../../assets/images/logo.png";
 
 const MainPanel = () => {
   return (

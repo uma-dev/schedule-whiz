@@ -2,7 +2,7 @@ import MainPanel from "./MainPanel";
 import Navbar from "./Navbar";
 import SecondaryPanel from "./SecondaryPanel";
 
-const Grid = () => {
+const Dashboard = () => {
   return (
     <div className="grid grid-cols-11 gap-16 p-10 h-screen bg-white">
       <div className="col-span-2 w-full h-full">
@@ -18,4 +18,4 @@ const Grid = () => {
   );
 };
 
-export default Grid;
+export default Dashboard;

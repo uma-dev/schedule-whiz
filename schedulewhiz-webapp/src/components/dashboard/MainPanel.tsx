@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "../common/Card";
 import logo from "../../assets/images/logo.png";
 
 const MainPanel = () => {

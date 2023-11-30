@@ -1,5 +1,5 @@
+import Navbar from "../common/Navbar";
 import MainPanel from "./MainPanel";
-import Navbar from "./Navbar";
 import SecondaryPanel from "./SecondaryPanel";
 
 const Dashboard = () => {

@@ -3,10 +3,6 @@ import Card from "../common/Card";
 const SecondaryPanel = () => {
   return (
     <div className="flex flex-col gap-16 ">
-      <div className="flex flex-row justify-end gap-6">
-        <i className="bx bxs-bell bx-sm"></i>
-        <i className="bx bxs-user-circle bx-sm"></i>
-      </div>
       <Card color="my-blue">
         <h2 className="text-base text-white">Next week schedule</h2>
         <p className="text-slate-400 text-sm">Make a request</p>

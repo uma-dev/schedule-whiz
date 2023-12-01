@@ -11,7 +11,7 @@ const MainPanel = () => {
             <span>Its good to see you again</span>
           </div>
           <div className="flex items-center flex-1 h-32 justify-center">
-            <img src={logo} className="w-10/12 h-fit" alt="React Image" />
+            <img src={logo} className="w-10/12 h-fit" alt="Logo" />
           </div>
         </div>
       </Card>

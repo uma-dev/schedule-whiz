@@ -1,8 +1,12 @@
 package com.umadev.schedulewhiz.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,5 +44,22 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
         }
    }
+
+   @GetMapping("/{employeeId}")
+    public ResponseEntity<?> findById(@PathVariable("employeeId") Integer theId){
+        try{
+            if(theId <= 0){
+                return ResponseEntity.badRequest().body("Employee ID cannot be negative."); 
+            }
+            Optional<Employee> findedEmployee = employeeService.getEmployeeById(theId);
+            if( findedEmployee.isEmpty() ){
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Employee not found.");
+            }
+            return new ResponseEntity<>(findedEmployee, HttpStatus.FOUND);
+        }
+        catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+        }
+    }
 
 }

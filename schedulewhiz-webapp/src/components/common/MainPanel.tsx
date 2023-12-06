@@ -1,13 +1,41 @@
 import Card from "../common/Card";
 import logo from "../../assets/images/logo.png";
+import { Employee } from "../../types/Employee";
+import { useEffect, useState } from "react";
+import getEmployeeById from "../../services/employeeService";
 
-const MainPanel = () => {
+interface Props {
+    employeeId: number;
+}
+
+const MainPanel = ({employeeId } : Props) => {
+
+  const [employee, setEmployee] = useState<Employee | null>(null);
+
+  useEffect( () => {
+      const fetchEmployee = async () => {
+      try {
+        const employeeData = await getEmployeeById(employeeId);
+        setEmployee(employeeData);
+      } catch (error) {
+        console.error('Error fetching employee data:', error);
+      }
+    };
+    fetchEmployee();
+  }, [employeeId]);
+
+  console.log(employee);
+
+  if (!employee) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="grid grid-cols-2 gap-16">
       <Card color="my-grey col-span-2">
         <div className="flex flex-row items-center">
           <div className="w-full flex flex-col flex-1 gap-2">
-            <h2 className="text-2xl">Hello name!</h2>
+            <h2 className="text-2xl">{`Hello ${employee.names}!`}</h2>
             <span>Its good to see you again</span>
           </div>
           <div className="flex items-center flex-1 h-32 justify-center">

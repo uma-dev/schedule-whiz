@@ -1,19 +1,19 @@
 import Card from "../common/Card";
 import logo from "../../assets/images/logo.png";
-import { Employee } from "../../types/Employee";
 import { useEffect, useState } from "react";
-import getEmployeeById from "../../services/employeeService";
+import { Employee } from "../../types/Employee";
+import { getEmployeeById } from "../../services/employeeService";
 
 interface Props {
-    employeeId: number;
+  employeeId: number;
 }
 
-const MainPanel = ({employeeId } : Props) => {
+const MainPanel = ({ employeeId }: Props) => {
+    
+const [employee, setEmployee] = useState<Employee | null>(null);
 
-  const [employee, setEmployee] = useState<Employee | null>(null);
-
-  useEffect( () => {
-      const fetchEmployee = async () => {
+  useEffect(() => {
+    const fetchEmployee = async () => {
       try {
         const employeeData = await getEmployeeById(employeeId);
         setEmployee(employeeData);
@@ -21,10 +21,9 @@ const MainPanel = ({employeeId } : Props) => {
         console.error('Error fetching employee data:', error);
       }
     };
+
     fetchEmployee();
   }, [employeeId]);
-
-  console.log(employee);
 
   if (!employee) {
     return <div>Loading...</div>;
@@ -34,23 +33,23 @@ const MainPanel = ({employeeId } : Props) => {
     <div className="grid grid-cols-2 gap-16">
       <Card color="my-grey col-span-2">
         <div className="flex flex-row items-center">
-          <div className="w-full flex flex-col flex-1 gap-2">
-            <h2 className="text-2xl">{`Hello ${employee.names}!`}</h2>
+          <div className="w-full flex flex-col flex-1 min-w-fit gap-2">
+            <h2 className="text-xl">{`Hello ${employee.names}!`}</h2>
             <span>Its good to see you again</span>
           </div>
-          <div className="flex items-center flex-1 h-32 justify-center">
-            <img src={logo} className="w-10/12 h-fit" alt="Logo" />
+          <div className="flex items-center max-w-xs flex-1 h-fit justify-center">
+            <img src={logo} className="max-w-[60%] h-fit" alt="Logo" />
           </div>
         </div>
       </Card>
 
       <Card color="my-grey col-span-1 ">
-        <h3 className="text-2xl">7:30am - 4:00pm</h3>
+        <h3 className="text-xl">7:30am - 4:00pm</h3>
         Schedule this week
       </Card>
 
       <Card color="my-grey col-span-1">
-        <h3 className="text-2xl">2:30am - 3:30pm</h3>
+        <h3 className="text-xl">2:30am - 3:30pm</h3>
         Break
       </Card>
 

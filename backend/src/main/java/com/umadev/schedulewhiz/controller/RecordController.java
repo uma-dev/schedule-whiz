@@ -31,7 +31,7 @@ public class RecordController {
     public ResponseEntity<List<Record>> getRecordsbyEmployeeId(@PathVariable("employeeId") Integer employeeId){
         List<Record> findedRecords = recordService.findbyEmployeeId(employeeId);
         
-        return new ResponseEntity<>(findedRecords, HttpStatus.FOUND); 
+        return new ResponseEntity<>(findedRecords, HttpStatus.OK); 
     }
 
     // Post (save) a new record

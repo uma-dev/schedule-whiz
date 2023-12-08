@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.umadev.schedulewhiz.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin(origins = "http://192.168.3.110:5173")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -55,7 +57,7 @@ public class EmployeeController {
             if( findedEmployee.isEmpty() ){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Employee not found.");
             }
-            return new ResponseEntity<>(findedEmployee, HttpStatus.FOUND);
+            return new ResponseEntity<>(findedEmployee, HttpStatus.OK);
         }
         catch(Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");

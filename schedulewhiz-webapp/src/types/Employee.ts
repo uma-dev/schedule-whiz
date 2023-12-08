@@ -1,6 +1,9 @@
 export interface Employee {
-  employeeId: number;
+  id: number;
   names: string;
   firstSurname: string;
   secondSurname: string;
+  schedule: number;
+  managedTeam: string;
+  team: string;
 }

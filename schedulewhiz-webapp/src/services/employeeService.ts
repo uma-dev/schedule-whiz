@@ -1,11 +1,7 @@
-import axios from "axios";
-import { Employee } from "../types/Employee";
+import { Employee } from '../types/Employee';
+import api from '../api/axiosConfig';
 
-const API_BASE_URL = "https://192.168.3.110:8090/api";
-
-const getEmployeeById = async (employeeId: number): Promise<Employee> => {
-  const response = await axios.get(`${API_BASE_URL}/employees/${employeeId}`);
+export const getEmployeeById = async (employeeId: number): Promise<Employee> => {
+  const response = await api.get(`/api/employees/${employeeId}`);
   return response.data;
 };
-
-export default getEmployeeById;

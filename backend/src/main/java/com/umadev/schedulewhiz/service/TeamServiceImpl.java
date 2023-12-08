@@ -28,4 +28,9 @@ public class TeamServiceImpl implements TeamService {
     public Optional<Team> findByName(String teamName){
         return teamRepository.findByName(teamName);
     }
+
+    @Override
+    public Optional<Team> findById(Integer teamId){
+        return teamRepository.findById(teamId);
+    }
 }

@@ -9,4 +9,5 @@ public interface TeamService {
      
     List<Team> findAll();
     Optional<Team> findByName(String teamName); 
+    Optional<Team> findById(Integer teamId); 
 } 

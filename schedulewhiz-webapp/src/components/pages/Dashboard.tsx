@@ -9,7 +9,7 @@ const Dashboard = () => {
     <Grid>
       <Navbar />
       <MainPanel employeeId={theEmployeeId} />
-      <SecondaryPanel />
+      <SecondaryPanel employeeId={theEmployeeId} />
     </Grid>
   );
 };

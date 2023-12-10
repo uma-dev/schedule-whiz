@@ -4,7 +4,7 @@ import SecondaryPanel from "../common/SecondaryPanel";
 import Grid from "../common/Grid";
 
 const Dashboard = () => {
-  const theEmployeeId = 60;
+  const theEmployeeId = 6;
   return (
     <Grid>
       <Navbar />

@@ -43,8 +43,7 @@ public class RecordController {
             theRecord.setId(0);
             Record savedRecord = recordService.saveRecord(theRecord);
             return new ResponseEntity<>(savedRecord, HttpStatus.CREATED);
-        }
-        catch(Exception e){
+        } catch(Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

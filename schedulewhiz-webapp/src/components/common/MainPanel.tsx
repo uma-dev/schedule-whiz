@@ -3,14 +3,14 @@ import logo from "../../assets/images/logo.png";
 import { useEffect, useState } from "react";
 import { Employee } from "../../types/Employee";
 import { getEmployeeById } from "../../services/employeeService";
+import getDate from "../../services/getDate";
 
 interface Props {
   employeeId: number;
 }
 
 const MainPanel = ({ employeeId }: Props) => {
-    
-const [employee, setEmployee] = useState<Employee | null>(null);
+  const [employee, setEmployee] = useState<Employee | null>(null);
 
   useEffect(() => {
     const fetchEmployee = async () => {
@@ -18,7 +18,7 @@ const [employee, setEmployee] = useState<Employee | null>(null);
         const employeeData = await getEmployeeById(employeeId);
         setEmployee(employeeData);
       } catch (error) {
-        console.error('Error fetching employee data:', error);
+        console.error("Error fetching employee data:", error);
       }
     };
 
@@ -44,17 +44,17 @@ const [employee, setEmployee] = useState<Employee | null>(null);
       </Card>
 
       <Card color="my-grey col-span-1 ">
-        <h3 className="text-xl">7:30am - 4:00pm</h3>
+        <h3 className="text-xl">{`${employee.schedule.name}`}</h3>
         Schedule this week
       </Card>
 
       <Card color="my-grey col-span-1">
-        <h3 className="text-xl">2:30am - 3:30pm</h3>
+        <h3 className="text-xl">14:30-15:30</h3>
         Break
       </Card>
 
       <div className="flex flex-col p-3 gap-4 col-span-2 h-full">
-        January 7, 2024
+        {getDate()}
         <span className="text-xl">Today</span>
       </div>
     </div>

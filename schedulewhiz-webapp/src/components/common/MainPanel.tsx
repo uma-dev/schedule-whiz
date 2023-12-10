@@ -30,32 +30,42 @@ const MainPanel = ({ employeeId }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-16">
+    <div className="grid grid-cols-2 gap-12">
       <Card color="my-grey col-span-2">
         <div className="flex flex-row items-center">
           <div className="w-full flex flex-col flex-1 min-w-fit gap-2">
-            <h2 className="text-xl">{`Hello ${employee.names}!`}</h2>
+            <h2 className="font-semibold">{`Hello ${employee.names}!`}</h2>
             <span>Its good to see you again</span>
           </div>
           <div className="flex items-center max-w-xs flex-1 h-fit justify-center">
-            <img src={logo} className="max-w-[60%] h-fit" alt="Logo" />
+            <img src={logo} className="max-w-[60%] h-fit max-h-14" alt="Logo" />
           </div>
         </div>
       </Card>
 
-      <Card color="my-grey col-span-1 ">
-        <h3 className="text-xl">{`${employee.schedule.name}`}</h3>
-        Schedule this week
+      <Card color="my-grey flex flex-row items-center gap-4 justify-center">
+        <div className="flex flex-col items-center">
+          <i className='bx bx-calendar bx-md'></i>
+        </div>
+        <div className="flex flex-col items-center">
+            <h3 className="font-bold">{`${employee.schedule.name}`}</h3>
+            <span className="text-xs">Weekly agenda</span>
+        </div>
+     </Card>
+
+      <Card color="my-grey flex flex-row items-center gap-4 justify-center">
+        <div className="flex flex-col items-center">
+          <i className='bx bx-bowl-hot bx-md'></i>
+        </div>
+        <div className="flex flex-col items-center">
+            <h3 className="font-bold">14:30-15:30</h3>
+            <span className="text-xs">Meal break</span>
+        </div>
       </Card>
 
-      <Card color="my-grey col-span-1">
-        <h3 className="text-xl">14:30-15:30</h3>
-        Break
-      </Card>
-
-      <div className="flex flex-col p-3 gap-4 col-span-2 h-full">
-        {getDate()}
-        <span className="text-xl">Today</span>
+      <div className="flex flex-col px-3 col-span-2 h-full">
+        <span className="text-xs">Today</span>
+        <span>{getDate()}</span>
       </div>
     </div>
   );

@@ -36,29 +36,29 @@ const Navbar = () => {
 
   return (
     <Card color="black-stone flex flex-col h-full justify-between">
-      <div className="flex flex-col gap-12">
-        <h1 className="flex flex-col text-3xl text-white">
+      <div className="flex flex-col gap-16">
+        <h1 className="flex flex-col text-2xl text-white">
           Schedule
           <span className="text-yellow-schedulewhiz"> Whiz</span>
         </h1>
 
-        <ul className="flex flex-col gap-12 text-base">
+        <ul className="flex flex-col gap-9 text-sm">
           <li
             onClick={navigateToDashboard}
-            className={`flex gap-1 items-center ${
+            className={`flex gap-1 items-center group ${
               activeLink === "home" ? "text-white" : "text-white/70"
             }`}
           >
-            <i className="bx bxs-dashboard bx-sm"></i>
+            <i className="bx bxs-dashboard bx-xs group-hover:animate-pulse"></i>
             Dashboard
           </li>
           <li
             onClick={navigateToMyTeam}
-            className={`flex gap-1 items-center ${
+            className={`flex gap-1 items-center group ${
               activeLink === "myTeam" ? "text-white" : "text-white/70"
             }`}
           >
-            <i className="bx bxs-group bx-sm"></i>
+            <i className="bx bxs-group bx-xs group-hover:animate-pulse"></i>
             My Team
           </li>
         </ul>
@@ -66,9 +66,9 @@ const Navbar = () => {
 
       <div
         onClick={navigateToLogin}
-        className="flex gap-1 items-center text-white/70 hover:text-yellow-schedulewhiz"
+        className="flex gap-1 items-center text-white/70 text-sm group"
       >
-        <i className="bx bxs-log-out bx-sm"></i>
+        <i className="bx bxs-log-out bx-xs group-hover:text-yellow-schedulewhiz group-hover:animate-pulse"></i>
         Logout
       </div>
     </Card>

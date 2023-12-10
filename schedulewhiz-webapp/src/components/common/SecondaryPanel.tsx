@@ -1,6 +1,28 @@
+import { useEffect, useState } from "react";
+import { getRecordsByEmployeeId } from "../../services/recordService";
+import { Record } from "../../types/Record";
 import Card from "../common/Card";
 
-const SecondaryPanel = () => {
+interface Props {
+  employeeId: number;
+}
+
+const SecondaryPanel = ({ employeeId }: Props) => {
+  const [records, setRecords] = useState<Record[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedRecords = await getRecordsByEmployeeId(employeeId);
+        setRecords(fetchedRecords);
+      } catch (error) {
+        console.error("Error fetching records:", error);
+      }
+    };
+
+    fetchData();
+  }, [employeeId]);
+
+  console.log(records);
   return (
     <div className="flex flex-col gap-16 ">
       <Card color="my-blue">
@@ -16,8 +38,8 @@ const SecondaryPanel = () => {
         <p className="text-slate-400 text-sm">of the month</p>
       </Card>
       <Card color="yellow-alert flex flex-row gap-2 items-end">
-        <h2 className="text-4xl text-black font-black">2</h2>
-        <p className="text-slate-400">issues in the month</p>
+        <h2 className="text-4xl text-black font-black">{`${records.length}`}</h2>
+        <p className="text-slate-400">records in the month</p>
       </Card>
     </div>
   );

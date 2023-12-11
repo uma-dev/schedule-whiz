@@ -1,4 +1,3 @@
-
 -- Generate ScheduleWhiz sample database
 
 DROP SCHEMA IF EXISTS "schedule-whiz-v1" CASCADE;
@@ -15,6 +14,9 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Employees"
     names character varying(50) NOT NULL,
     first_surname character varying(50) NOT NULL,
     second_surname character varying(50) NOT NULL,
+    email character varying(255) NOT NULL,
+    image_url character varying(255),
+    password character(68) NOT NULL,
     fk_schedule integer,
     fk_team serial NOT NULL,
     fk_managed_team integer,
@@ -125,7 +127,6 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Issues"
 
 END;
 
-
 -- Populate database
 
 TRUNCATE TABLE  "schedule-whiz-v1"."Teams"  RESTART IDENTITY CASCADE;
@@ -159,44 +160,55 @@ VALUES ('Late'),
 -- Add schedules
 INSERT INTO "schedule-whiz-v1"."Schedules"(name, start_time, end_time, max_employees, current_employees)
 VALUES
-    ('7:00-15:30', '07:00:00-06:00', '15:30:00-06:00', 2, 0),
-    ('7:30-16:00', '07:30:00-06:00', '16:00:00-06:00', 2, 0),
-    ('8:00-16:30', '08:00:00-06:00', '16:30:00-06:00', 3, 0),
-    ('8:30-17:00', '08:30:00-06:00', '17:00:00-06:00', 4, 0),
-    ('9:00-17:30', '09:00:00-06:00', '17:30:00-06:00', 5, 0),
-    ('9:30-18:00', '09:30:00-06:00', '18:00:00-06:00', 2, 0),
-	('10:00-18:30', '09:30:00-06:00', '18:00:00-06:00', 2, 0);
+    ('7:00 - 15:30', '07:00:00-06:00', '15:30:00-06:00', 2, 0),
+    ('7:30 - 16:00', '07:30:00-06:00', '16:00:00-06:00', 2, 0),
+    ('8:00 - 16:30', '08:00:00-06:00', '16:30:00-06:00', 3, 0),
+    ('8:30 - 17:00', '08:30:00-06:00', '17:00:00-06:00', 4, 0),
+    ('9:00 - 17:30', '09:00:00-06:00', '17:30:00-06:00', 5, 0),
+    ('9:30 - 18:00', '09:30:00-06:00', '18:00:00-06:00', 2, 0),
+	('10:00 - 18:30', '09:30:00-06:00', '18:00:00-06:00', 2, 0);
 
 -- Add employees with a default schema
-INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, fk_schedule, fk_team)
+
+INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, image_url, password, fk_schedule, fk_team)
 VALUES
- 	('John', 'Doe', 'Smith', 5, 1),
- 	('Jane', 'Johnson', 'Williams', 5, 2),
-  	('Michael', 'Brown', 'Davis', 5, 3),
-  	('Emily', 'Wilson', 'Martinez', 5, 4),
-  	('Robert', 'Lee', 'Garcia', 5, 5),
-  	('Susan', 'Harris', 'Rodriguez', 5, 6),
-  	('William', 'Taylor', 'Lopez', 5, 7),
-  	('Sarah', 'Clark', 'Hernandez', 5, 5),
-  	('David', 'Anderson', 'Gonzalez', 5, 3),
-  	('Linda', 'White', 'Perez', 5, 1),
-  	('James', 'Moore', 'Sanchez', 5, 1),
-  	('Mary', 'Allen', 'Rivera', 5, 2),
-  	('Richard', 'Hall', 'Martinez', 5, 3),
-  	('Jennifer', 'Young', 'Smith', 5,4),
-  	('Charles', 'Lewis', 'Johnson', 5, 5),
-	('Patricia', 'Green', 'Brown', 5, 6),
- 	('Matthew', 'Scott', 'Davis', 5, 7),
-  	('Jessica', 'Adams', 'Williams', 5, 4),
-  	('Daniel', 'Turner', 'Harris', 5, 3),
-  	('Karen', 'Baker', 'Clark', 5, 5);
+ 	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 1),
+	('Susan', 'Doe', 'Smith', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 3, 1),
+	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 4, 1),
+	('Susan', 'Doe', 'Smith', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 1),
+	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1),
+	('Susan', 'Emily', 'Smith', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1);
+
+INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, password, fk_schedule, fk_team)
+VALUES
+ 	('John', 'Doe', 'Smith', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 1),
+ 	('Jane', 'Johnson', 'Williams', 'email2@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 2),
+  	('Michael', 'Brown', 'Davis', 'email3@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3),
+  	('Emily', 'Wilson', 'Martinez', 'email4@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 4),
+  	('Robert', 'Lee', 'Garcia', 'email15@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 5),
+  	('Susan', 'Harris', 'Rodriguez', 'email6@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 6),
+  	('William', 'Taylor', 'Lopez', 'email7@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 7),
+  	('Sarah', 'Clark', 'Hernandez', 'email8@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 5),
+  	('David', 'Anderson', 'Gonzalez', 'email9@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3),
+  	('Linda', 'White', 'Perez', 'email0@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 1),
+  	('James', 'Moore', 'Sanchez', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 1),
+  	('Mary', 'Allen', 'Rivera', 'email2@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 2),
+  	('Richard', 'Hall', 'Martinez', 'email3@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3),
+  	('Jennifer', 'Young', 'Smith', 'email4@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5,4),
+  	('Charles', 'Lewis', 'Johnson', 'email5@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 5),
+	('Patricia', 'Green', 'Brown', 'email6@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 6),
+ 	('Matthew', 'Scott', 'Davis', 'email7@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 7),
+  	('Jessica', 'Adams', 'Williams', 'email8@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 4),
+  	('Daniel', 'Turner', 'Harris', 'email9@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3),
+  	('Karen', 'Baker', 'Clark', 'email10@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 5);
  
 -- Add managers
-INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, fk_team, fk_managed_team)
+INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, password, fk_team, fk_managed_team)
 VALUES
- 	('Jose', 'Smith', 'Smith', 1, 1),
- 	('Luis', 'White', 'White', 2, 2),
-	('Francisco', 'Turner', 'Turner', 3, 3),
-	('Antonio', 'Clark', 'Clark', 4, 4),
-	('Isabel', 'Clark', 'Clark', 5, 5),
-	('Rosa', 'Lopez', 'Lopez', 7, 7);
+ 	('Jose', 'Smith', 'Smith', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1),
+ 	('Luis', 'White', 'White', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 2),
+	('Francisco', 'Turner', 'Turner', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 3, 3),
+	('Antonio', 'Clark', 'Clark', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 4, 4),
+	('Isabel', 'Clark', 'Clark', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 5),
+	('Rosa', 'Lopez', 'Lopez', 'email1@gmail.com', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 7, 7);
+

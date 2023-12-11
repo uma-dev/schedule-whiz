@@ -6,7 +6,9 @@ export interface Employee {
   names: string;
   firstSurname: string;
   secondSurname: string;
-  schedule: Schedule;
-  managedTeam: Team;
+  email: string;
+  imageUrl: string;
   team: Team;
+  managedTeam: Team;
+  schedule: Schedule;
 }

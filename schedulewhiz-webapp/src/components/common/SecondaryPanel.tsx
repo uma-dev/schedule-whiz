@@ -22,7 +22,6 @@ const SecondaryPanel = ({ employeeId }: Props) => {
     fetchData();
   }, [employeeId]);
 
-  console.log(records);
   return (
     <div className="flex flex-col gap-10">
       <Card color="my-blue">

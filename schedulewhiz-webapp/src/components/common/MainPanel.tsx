@@ -58,7 +58,7 @@ const MainPanel = ({ employeeId }: Props) => {
           <i className='bx bx-bowl-hot bx-md'></i>
         </div>
         <div className="flex flex-col items-center">
-            <h3 className="font-bold">14:30-15:30</h3>
+            <h3 className="font-bold">14:30 - 15:30</h3>
             <span className="text-xs">Meal break</span>
         </div>
       </Card>

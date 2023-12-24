@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Employees"
     email character varying(255) NOT NULL,
     image_url character varying(255),
     role character varying(20) NOT NULL,
-    password character(68) NOT NULL,
+    password character varying(68) NOT NULL,
     fk_schedule integer,
     fk_team serial NOT NULL,
     fk_managed_team integer,
@@ -72,6 +72,17 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Issue_statuses"
     PRIMARY KEY (issue_status_id)
 );
 
+CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Tokens"
+(
+    token_id serial NOT NULL,
+    token character varying(255) NOT NULL,
+    token_type character varying(20) NOT NULL,
+    revoked boolean NOT NULL,
+    expired boolean NOT NULL,
+    fk_employee integer NOT NULL,
+    PRIMARY KEY (token_id)
+);
+
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Employees"
     ADD FOREIGN KEY (fk_team)
     REFERENCES "schedule-whiz-v1"."Teams" (team_id) MATCH SIMPLE
@@ -123,6 +134,14 @@ ALTER TABLE IF EXISTS "schedule-whiz-v1"."Records"
 ALTER TABLE IF EXISTS "schedule-whiz-v1"."Issues"
     ADD FOREIGN KEY (fk_issue_status)
     REFERENCES "schedule-whiz-v1"."Issue_statuses" (issue_status_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS "schedule-whiz-v1"."Tokens"
+    ADD FOREIGN KEY (fk_employee)
+    REFERENCES "schedule-whiz-v1"."Employees" (employee_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;

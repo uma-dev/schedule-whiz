@@ -2,6 +2,8 @@ package com.umadev.schedulewhiz.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,23 +12,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Collection;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-@ToString
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 // Table name inside characters ` because of upper case table names defined
 // in DDL script
 @Table(name = "`Employees`")
@@ -64,7 +64,7 @@ public class Employee implements UserDetails {
   // Bidirectional one to many
   @ManyToOne
   @JoinColumn(name = "fk_team")
-  @ToString.Exclude
+  // @ToString.Exclude
   private Team team;
 
   // Unidirectional one to one
@@ -73,45 +73,45 @@ public class Employee implements UserDetails {
   @ToString.Exclude
   private Team managedTeam;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "role")
+  private Role role;
+
+  // @OneToMany(mappedBy = "employee")
+  // private ListToken tokens;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    return List.of(new SimpleGrantedAuthority(role.name()));
   }
 
   @Override
   public String getPassword() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    return password;
   }
 
   @Override
   public String getUsername() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    return email;
   }
 
   @Override
   public boolean isAccountNonExpired() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
+    return true;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
+    return true;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isCredentialsNonExpired'");
+    return true;
   }
 
   @Override
   public boolean isEnabled() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
+    return true;
   }
 }

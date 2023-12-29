@@ -7,9 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { postAuth } from "../../services/postAuth";
 
-// const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^.*$/;
 const PWD_REGEX = /^.*$/;
 
 const LoginForm = () => {
@@ -64,13 +63,13 @@ const LoginForm = () => {
       setUser("");
       setPwd("");
     } catch (err) {
-      // if (!err?.response) {
-      //   setErrMsg("No Server Response");
-      // } else if (err.response?.status === 409) {
-      //   setErrMsg("Username Taken");
-      // } else {
-      //   setErrMsg("Registration Failed");
-      // }
+      if (!err?.response) {
+        setErrMsg("No Server response");
+      } else if (err.response?.status === 409) {
+        setErrMsg("Username taken");
+      } else {
+        setErrMsg("Login failed");
+      }
       errRef.current?.focus();
     }
   };
@@ -101,7 +100,7 @@ const LoginForm = () => {
           >
             <div className="relative z-0 w-full mb-5 group">
               <input
-                type="email"
+                type="text"
                 name="floating_email"
                 id="floating_email"
                 placeholder=" "
@@ -123,22 +122,24 @@ const LoginForm = () => {
                 Email address
                 <FontAwesomeIcon
                   icon={faCheck}
-                  className={validName ? "valid" : "hide"}
+                  className={
+                    validName ? "visible text-green-200 ml-2" : "hidden"
+                  }
                 />
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className={validName || !user ? "hide" : "invalid"}
+                  className={
+                    validName || !user ? "hidden" : "visible text-red-400 ml-2"
+                  }
                 />
               </label>
               <p
                 id="uidnote"
                 className={
-                  userFocus && user && !validName ? "instructions" : "offscreen"
+                  userFocus && user && !validName ? "visible" : "hidden"
                 }
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                Valid email.
-                <br />
+                <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                 Must be a valid email address
                 <br />
               </p>
@@ -166,16 +167,20 @@ const LoginForm = () => {
                 Password
                 <FontAwesomeIcon
                   icon={faCheck}
-                  className={validPwd ? "valid" : "hide"}
+                  className={
+                    validPwd ? "visible text-green-200 ml-2" : "hidden"
+                  }
                 />
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className={validPwd || !pwd ? "hide" : "invalid"}
+                  className={
+                    validPwd || !pwd ? "hidden" : "visible text-red-400 ml-2"
+                  }
                 />
               </label>
               <p
                 id="pwdnote"
-                className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+                className={pwdFocus && !validPwd ? "visible" : "hidden"}
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
                 8 to 24 characters.

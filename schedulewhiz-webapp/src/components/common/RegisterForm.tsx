@@ -5,6 +5,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { registerUser } from "../../services/registerUser";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const NAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
@@ -88,8 +89,13 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await registerUser(email, names, firstSurname, pwd);
-      console.log(response?.access_token);
+      const response = await registerUser(
+        email,
+        names,
+        firstSurname,
+        secondSurname,
+        pwd,
+      );
       console.log(JSON.stringify(response));
       setSuccess(true);
       //clear state and controlled inputs
@@ -392,14 +398,6 @@ const RegisterForm = () => {
               REGISTER
             </button>
           </form>
-          <div className="text-gray-500">
-            Already registered?{" "}
-            <a href="/">
-              <span className="text-gray-300 hover:text-yellow-schedulewhiz">
-                Login
-              </span>
-            </a>{" "}
-          </div>
         </>
       )}
     </>

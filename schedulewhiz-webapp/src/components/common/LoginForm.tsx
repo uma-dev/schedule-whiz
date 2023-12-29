@@ -55,7 +55,6 @@ const LoginForm = () => {
 
     try {
       const response = await postAuth(user, pwd);
-      console.log(response?.access_token);
       console.log(JSON.stringify(response));
       setSuccess(true);
       //clear state and controlled inputs
@@ -204,14 +203,6 @@ const LoginForm = () => {
               LOGIN
             </button>
           </form>
-          <div className="text-gray-500">
-            Don't have an account?{" "}
-            <a href="/">
-              <span className="text-gray-300 hover:text-yellow-schedulewhiz">
-                Register
-              </span>
-            </a>{" "}
-          </div>
         </>
       )}
     </>

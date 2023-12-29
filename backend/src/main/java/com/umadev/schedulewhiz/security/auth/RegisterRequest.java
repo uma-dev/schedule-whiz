@@ -1,7 +1,6 @@
 package com.umadev.schedulewhiz.security.auth;
 
 import com.umadev.schedulewhiz.entity.Role;
-import com.umadev.schedulewhiz.entity.Team;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +18,4 @@ public class RegisterRequest {
   private String email;
   private String password;
   private Role role;
-  private Team team;
 }

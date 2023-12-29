@@ -50,7 +50,6 @@ public class AuthenticationService {
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .role(request.getRole())
-            .team(request.getTeam())
             .build();
 
     Employee savedUser = repository.save(user);

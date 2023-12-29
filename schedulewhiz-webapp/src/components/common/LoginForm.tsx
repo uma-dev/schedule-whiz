@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { postAuth } from "../../services/postAuth";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const PWD_REGEX = /^.*$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const LoginForm = () => {
   const userRef = useRef<HTMLInputElement | null>(null);
@@ -181,7 +180,7 @@ const LoginForm = () => {
                 id="pwdnote"
                 className={pwdFocus && !validPwd ? "visible text-xs" : "hidden"}
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                 8 to 24 characters.
                 <br />
                 Must include uppercase and lowercase letters, a number and a

@@ -32,7 +32,7 @@ const Authentication = () => {
         <div className="text-gray-500">
           {whichForm ? "Don't have an account? " : "Already registered? "}
           <a onClick={changeForm}>
-            <span className="text-gray-300 hover:text-yellow-schedulewhiz">
+            <span className="text-gray-300 hover:text-yellow-schedulewhiz underline">
               {whichForm ? "Register" : "Login"}
             </span>
           </a>

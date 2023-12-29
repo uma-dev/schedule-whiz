@@ -32,7 +32,7 @@ Here is a mockup of the user interface:
 
 ## Sprint 1 (MVP part 1)
 
-- [ ] As an employee I want to login in the app with the credentials from my pc.
+- [x] As an employee I want to login in the app with the credentials from my pc.
 - [ ] As a user I want to easily register my assistance.
 
 ![Spring 1](./images/sprint-1.png)
@@ -62,7 +62,7 @@ Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUT
 
 - [x] Initialize the Spring Boot project.
 - [x] Create the database schema.
-- [ ] Implement user authentication.
+- [x] Implement user authentication.
 - [ ] Design the scheduling algorithm.
 - [x] Develop the user interface.
 - [ ] Integrate flexibility and remote work features.

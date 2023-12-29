@@ -2,13 +2,13 @@ import api from "../api/axiosConfig";
 import { AuthResponse } from "../types/AuthResponse";
 
 export const postAuth = async (
-  user: string,
-  pwd: string,
+  email: string,
+  password: string,
 ): Promise<AuthResponse> => {
   try {
     const response = await api.post(
       "/api/auth/authenticate",
-      { user, pwd },
+      { email, password },
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,

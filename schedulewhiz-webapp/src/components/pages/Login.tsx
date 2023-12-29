@@ -22,8 +22,8 @@ const Login = () => {
       <div className="flex flex-col flex-1 text-white gap-4 items-center justify-center">
         <img src={minimalLogo} className="w-16 h-fit" alt="Logo" />
 
-        {/* <LoginForm /> */}
-        <RegisterForm />
+        <LoginForm />
+        {/* <RegisterForm /> */}
       </div>
 
       <div className="flex flex-1">

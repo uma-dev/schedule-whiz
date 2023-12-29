@@ -65,8 +65,8 @@ const LoginForm = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
-      } else if (err.response?.status === 409) {
-        setErrMsg("Username taken");
+        // } else if (err.response?.status === 409) {
+        //   setErrMsg("Username taken");
       } else {
         setErrMsg("Login failed");
       }
@@ -113,11 +113,11 @@ const LoginForm = () => {
                 aria-describedby="uidnote"
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer"
+                className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none text-white dark:border-gray-600 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer"
               />
               <label
                 htmlFor="floating_email"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-600 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-600 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Email address
                 <FontAwesomeIcon
@@ -136,7 +136,7 @@ const LoginForm = () => {
               <p
                 id="uidnote"
                 className={
-                  userFocus && user && !validName ? "visible" : "hidden"
+                  userFocus && user && !validName ? "visible text-xs" : "hidden"
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
@@ -150,7 +150,7 @@ const LoginForm = () => {
                 type="password"
                 name="floating_password"
                 id="floating_password"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer"
+                className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none text-white dark:border-gray-600 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer"
                 placeholder=" "
                 required
                 onChange={(e) => setPwd(e.target.value)}
@@ -162,7 +162,7 @@ const LoginForm = () => {
               />
               <label
                 htmlFor="floating_password"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-600 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-600 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Password
                 <FontAwesomeIcon
@@ -180,7 +180,7 @@ const LoginForm = () => {
               </label>
               <p
                 id="pwdnote"
-                className={pwdFocus && !validPwd ? "visible" : "hidden"}
+                className={pwdFocus && !validPwd ? "visible text-xs" : "hidden"}
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
                 8 to 24 characters.

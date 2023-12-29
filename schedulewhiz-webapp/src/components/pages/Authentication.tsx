@@ -3,7 +3,7 @@ import minimalLogo from "../../assets/images/logo-simple.png";
 import LoginForm from "../common/LoginForm";
 import RegisterForm from "../common/RegisterForm";
 
-const Login = () => {
+const Authentication = () => {
   const svgCode = `<svg width="695" height="1024" viewBox="0 0 695 1024" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M695 0V1024H75.9997C75.9997 1024 -121.5 206 122 476C365.5 746 695 0 695 0Z" fill="#EBB200"/></svg>`;
 
   const encodedSvg = btoa(svgCode);
@@ -22,8 +22,8 @@ const Login = () => {
       <div className="flex flex-col flex-1 text-white gap-4 items-center justify-center">
         <img src={minimalLogo} className="w-16 h-fit" alt="Logo" />
 
-        <LoginForm />
-        {/* <RegisterForm /> */}
+        {/* <LoginForm /> */}
+        <RegisterForm />
       </div>
 
       <div className="flex flex-1">
@@ -37,4 +37,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Authentication;

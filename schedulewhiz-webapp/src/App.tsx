@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
-import Login from "./components/pages/Login";
 import MyTeam from "./components/pages/MyTeam";
+import Authentication from "./components/pages/Authentication";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Authentication />} />
         <Route path="/my-team" element={<MyTeam />} />
       </Routes>
     </BrowserRouter>

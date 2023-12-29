@@ -10,8 +10,7 @@ import { registerUser } from "../../services/registerUser";
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const NAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
 const SURNAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const PWD_REGEX = /^.*$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const RegisterForm = () => {
   const userRef = useRef<HTMLInputElement | null>(null);
@@ -36,6 +35,10 @@ const RegisterForm = () => {
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
+
+  const [matchPwd, setMatchPwd] = useState("");
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
@@ -62,11 +65,12 @@ const RegisterForm = () => {
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
-  }, [pwd]);
+    setValidMatch(pwd === matchPwd);
+  }, [pwd, matchPwd]);
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, pwd]);
+  }, [email, pwd, matchPwd]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -321,7 +325,7 @@ const RegisterForm = () => {
                 />
               </label>
             </div>
-            <div className="mb-4">
+            <div className="mb-1">
               <p
                 id="surnamenote"
                 className={
@@ -376,7 +380,7 @@ const RegisterForm = () => {
                 id="pwdnote"
                 className={pwdFocus && !validPwd ? "visible text-xs" : "hidden"}
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                 8 to 24 characters.
                 <br />
                 Must include uppercase and lowercase letters, a number and a
@@ -388,6 +392,52 @@ const RegisterForm = () => {
                 <span aria-label="hashtag">#</span>{" "}
                 <span aria-label="dollar sign">$</span>{" "}
                 <span aria-label="percent">%</span>
+              </p>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="password"
+                name="confirm_pwd"
+                id="confirm_pwd"
+                className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none text-white dark:border-gray-600 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer"
+                placeholder=" "
+                required
+                onChange={(e) => setMatchPwd(e.target.value)}
+                value={matchPwd}
+                aria-invalid={validMatch ? "false" : "true"}
+                aria-describedby="matchpwdnote"
+                onFocus={() => setMatchFocus(true)}
+                onBlur={() => setMatchFocus(false)}
+              />
+              <label
+                htmlFor="confirm_pwd"
+                className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-600 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Confirm Password:
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={
+                    validMatch ? "visible text-green-200 ml-2" : "hidden"
+                  }
+                />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className={
+                    validMatch || !matchPwd
+                      ? "hidden"
+                      : "visible text-red-400 ml-2"
+                  }
+                />
+              </label>
+              <p
+                id="matchpwdnote"
+                className={
+                  matchFocus && !validMatch ? "visible text-xs" : "hidden"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
+                Must be equal to password input field.
               </p>
             </div>
 

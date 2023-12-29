@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS "schedule-whiz-v1"."Employees"
     email character varying(255) NOT NULL,
     image_url character varying(255),
     role character varying(20) NOT NULL,
-    password character varying(68) NOT NULL,
+    password character varying(60) NOT NULL,
     fk_schedule integer,
-    fk_team serial NOT NULL,
+    fk_team integer,
     fk_managed_team integer,
     CONSTRAINT "Employees_pkey" PRIMARY KEY (employee_id),
     UNIQUE (fk_managed_team),
@@ -193,18 +193,18 @@ VALUES
 
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, image_url, role, password, fk_schedule, fk_team)
 VALUES
- 	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 1),
-	('Susan', 'Doe', 'Smith', 'email2@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 3, 1);
+ 	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 1),
+	('Susan', 'Doe', 'Smith', 'email2@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 3, 1);
 	
 
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, role, password, fk_schedule, fk_team)
 VALUES
-  	('William', 'Taylor', 'Lopez', 'email13@gmail.com', 'USER', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 7),
-  	('David', 'Anderson', 'Gonzalez', 'email15@gmail.com', 'USER', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3);
+  	('William', 'Taylor', 'Lopez', 'email13@gmail.com', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 7),
+  	('David', 'Anderson', 'Gonzalez', 'email15@gmail.com', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3);
  
 -- Add managers
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, role, password, fk_team, fk_managed_team)
 VALUES
- 	('Jose', 'Smith', 'Smith', 'email27@gmail.com', 'ADMIN', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1),
- 	('Luis', 'White', 'White', 'email28@gmail.com', 'ADMIN', '{bcrypt}$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 2);
+ 	('Jose', 'Smith', 'Smith', 'email27@gmail.com', 'ADMIN', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1),
+ 	('Luis', 'White', 'White', 'email28@gmail.com', 'ADMIN', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 2);
 

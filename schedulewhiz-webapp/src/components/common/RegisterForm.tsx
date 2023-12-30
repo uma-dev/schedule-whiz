@@ -110,9 +110,10 @@ const RegisterForm = () => {
       setSecondSurname("");
       setPwd("");
     } catch (err) {
+      console.log(err.response);
       if (!err?.response) {
         setErrMsg("No Server response");
-      } else if (err.response?.status === 409) {
+      } else if (err.response?.status === 403) {
         setErrMsg("Email taken");
       } else {
         setErrMsg("Register failed");
@@ -134,7 +135,7 @@ const RegisterForm = () => {
         <>
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className={errMsg ? "errmsg text-red-300" : "offscreen"}
             aria-live="assertive"
           >
             {errMsg}
@@ -443,7 +444,15 @@ const RegisterForm = () => {
 
             <button
               className="text-black bg-yellow-schedulewhiz hover:bg-yellow-600 focus:ring-1 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-              disabled={!validEmail || !validPwd ? true : false}
+              disabled={
+                !validEmail ||
+                !validPwd ||
+                !validMatch ||
+                !validFirstSurname ||
+                !validSecondSurname
+                  ? true
+                  : false
+              }
             >
               REGISTER
             </button>

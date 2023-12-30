@@ -63,10 +63,8 @@ const LoginForm = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
-        // } else if (err.response?.status === 409) {
-        //   setErrMsg("Username taken");
       } else {
-        setErrMsg("Login failed");
+        setErrMsg("Incorrect email or password");
       }
       errRef.current?.focus();
     }
@@ -85,7 +83,7 @@ const LoginForm = () => {
         <>
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className={errMsg ? "errmsg text-red-300" : "offscreen"}
             aria-live="assertive"
           >
             {errMsg}

@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 import {
   faCheck,
   faTimes,
@@ -11,6 +12,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const LoginForm = () => {
+  const { setAuth } = useContext(AuthContext);
   const userRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
@@ -54,16 +56,18 @@ const LoginForm = () => {
 
     try {
       const response = await postAuth(user, pwd);
-      console.log(JSON.stringify(response));
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
+      const accessToken = response?.access_token;
+      setAuth(user, pwd, accessToken);
       setUser("");
       setPwd("");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
-      } else {
+      } // TODO add conditionals for specific error codes
+      else {
         setErrMsg("Incorrect email or password");
       }
       errRef.current?.focus();

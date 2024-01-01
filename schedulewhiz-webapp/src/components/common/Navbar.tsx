@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const dashBoardPath = "/";
   const myTeamPath = "/my-team";
-  const loginPath = "/login";
+  const authenticationPath = "/authentication";
 
   useEffect(() => {
     const pathname = location.pathname;
@@ -30,8 +30,8 @@ const Navbar = () => {
     navigate(myTeamPath);
   };
 
-  const navigateToLogin = () => {
-    navigate(loginPath);
+  const navigateToAuth = () => {
+    navigate(authenticationPath);
   };
 
   return (
@@ -65,7 +65,7 @@ const Navbar = () => {
       </div>
 
       <div
-        onClick={navigateToLogin}
+        onClick={navigateToAuth}
         className="flex gap-1 items-center text-white/70 text-sm group"
       >
         <i className="bx bxs-log-out bx-xs group-hover:text-yellow-schedulewhiz group-hover:animate-pulse"></i>

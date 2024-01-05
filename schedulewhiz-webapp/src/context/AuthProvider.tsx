@@ -1,9 +1,10 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 // Create the context with initial values
 interface AuthContextProps {
   isAuthenticated: boolean;
-  login: () => void;
+  token: string | null;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -15,18 +16,29 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [token, setToken] = useState<string | null>(null);
 
-  const login = () => {
-    setIsAuthenticated(true);
+  useEffect(() => {
+    // TODO implement token verification
+    console.log("the token is: " + token);
+    const isAuthenticated = token !== null;
+    console.log("Is authenticated: " + isAuthenticated);
+
+    setToken(isAuthenticated ? token : null);
+  }, [token]);
+
+  const login = (newToken: string) => {
+    setToken(newToken);
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated: token !== null, token, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

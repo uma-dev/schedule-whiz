@@ -65,10 +65,8 @@ const LoginForm = () => {
       //clear state and controlled inputs
       //need value attrib on inputs for this
       const accessToken = response?.access_token;
-      console.log(accessToken);
-      console.log(from);
-      // setAuth(user, pwd, accessToken);
-      login();
+      console.log("From: " + from);
+      login(accessToken);
       setUser("");
       setPwd("");
       navigate(from, { replace: true });

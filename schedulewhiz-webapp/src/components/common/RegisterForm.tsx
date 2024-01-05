@@ -100,7 +100,6 @@ const RegisterForm = () => {
         secondSurname,
         pwd,
       );
-      console.log(JSON.stringify(response));
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
@@ -110,7 +109,7 @@ const RegisterForm = () => {
       setSecondSurname("");
       setPwd("");
     } catch (err) {
-      console.log(err.response);
+      console.error(err.response);
       if (!err?.response) {
         setErrMsg("No Server response");
       } else if (err.response?.status === 403) {

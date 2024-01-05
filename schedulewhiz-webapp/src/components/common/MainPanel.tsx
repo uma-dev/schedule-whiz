@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Employee } from "../../types/Employee";
 import { getEmployeeById } from "../../services/employeeService";
 import getDate from "../../services/getDate";
+import useAuth from "../../hooks/useAuth";
 
 interface Props {
   employeeId: number;
@@ -11,11 +12,12 @@ interface Props {
 
 const MainPanel = ({ employeeId }: Props) => {
   const [employee, setEmployee] = useState<Employee | null>(null);
+  const { token } = useAuth();
 
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const employeeData = await getEmployeeById(employeeId);
+        const employeeData = await getEmployeeById(employeeId, token);
         setEmployee(employeeData);
       } catch (error) {
         console.error("Error fetching employee data:", error);
@@ -23,7 +25,7 @@ const MainPanel = ({ employeeId }: Props) => {
     };
 
     fetchEmployee();
-  }, [employeeId]);
+  }, [employeeId, token]);
 
   if (!employee) {
     return <div>Loading...</div>;

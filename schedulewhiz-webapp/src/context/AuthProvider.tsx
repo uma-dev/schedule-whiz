@@ -20,9 +20,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // TODO implement token verification
-    console.log("the token is: " + token);
     const isAuthenticated = token !== null;
-    console.log("Is authenticated: " + isAuthenticated);
 
     setToken(isAuthenticated ? token : null);
   }, [token]);

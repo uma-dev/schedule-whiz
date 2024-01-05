@@ -13,10 +13,11 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const LoginForm = () => {
-  const { setAuth } = useAuth();
+  const { isAuthenticated, login } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
+  // TODO: fix from variable
   const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef<HTMLInputElement | null>(null);
@@ -31,7 +32,6 @@ const LoginForm = () => {
   const [pwdFocus, setPwdFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-  // const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current?.focus();
@@ -65,11 +65,12 @@ const LoginForm = () => {
       //clear state and controlled inputs
       //need value attrib on inputs for this
       const accessToken = response?.access_token;
-      setAuth(user, pwd, accessToken);
+      console.log(accessToken);
+      console.log(from);
+      // setAuth(user, pwd, accessToken);
+      login();
       setUser("");
       setPwd("");
-      console.log(from);
-      navigate("/", { replace: true });
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
@@ -99,7 +100,7 @@ const LoginForm = () => {
       >
         <div className="relative z-0 w-full mb-5 group">
           <input
-            type="text"
+            type="email"
             name="floating_email"
             id="floating_email"
             placeholder=" "
@@ -194,7 +195,7 @@ const LoginForm = () => {
 
         <button
           className="text-black bg-yellow-schedulewhiz hover:bg-yellow-600 focus:ring-1 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-          disabled={!validName || !validPwd ? true : false}
+          // disabled={!validName || !validPwd ? true : false}
         >
           LOGIN
         </button>

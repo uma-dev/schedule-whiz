@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [activeLink, setActiveLink] = useState("");
@@ -32,6 +34,11 @@ const Navbar = () => {
 
   const navigateToAuth = () => {
     navigate(authenticationPath);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigateToAuth();
   };
 
   return (
@@ -65,7 +72,7 @@ const Navbar = () => {
       </div>
 
       <div
-        onClick={navigateToAuth}
+        onClick={handleLogout}
         className="flex gap-1 items-center text-white/70 text-sm group"
       >
         <i className="bx bxs-log-out bx-xs group-hover:text-yellow-schedulewhiz group-hover:animate-pulse"></i>

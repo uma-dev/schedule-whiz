@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -53,6 +54,23 @@ public class EmployeeController {
         return ResponseEntity.badRequest().body("Employee ID cannot be negative.");
       }
       Optional<Employee> findedEmployee = employeeService.getEmployeeById(theId);
+      if (findedEmployee.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Employee not found.");
+      }
+      return new ResponseEntity<>(findedEmployee, HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<?> findByEmail(@RequestParam(name = "employeeEmail") String theEmail) {
+    try {
+      if (theEmail == null) {
+        return ResponseEntity.badRequest().body("Employee email cannot be empty.");
+      }
+      Optional<Employee> findedEmployee = employeeService.findByEmail(theEmail);
       if (findedEmployee.isEmpty()) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Employee not found.");
       }

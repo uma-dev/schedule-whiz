@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,11 +29,32 @@ public class RecordController {
 
   // Get records by employee id
   @GetMapping("/{employeeId}")
-  public ResponseEntity<List<Record>> getRecordsbyEmployeeId(
-      @PathVariable("employeeId") Integer employeeId) {
-    List<Record> findedRecords = recordService.findbyEmployeeId(employeeId);
+  public ResponseEntity<?> getRecordsbyEmployeeId(@PathVariable("employeeId") Integer employeeId) {
+    try {
+      if (employeeId <= 0) {
+        return ResponseEntity.badRequest().body("Employee ID cannot be negative.");
+      }
+      List<Record> findedRecords = recordService.findbyEmployeeId(employeeId);
+      return new ResponseEntity<>(findedRecords, HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
+  }
 
-    return new ResponseEntity<>(findedRecords, HttpStatus.OK);
+  @GetMapping("/search")
+  public ResponseEntity<?> getRecordsbyEmployeeEmail(
+      @RequestParam(name = "employeeEmail") String employeeEmail) {
+    try {
+      if (employeeEmail == null) {
+        return ResponseEntity.badRequest().body("Employee email cannot be empty.");
+      }
+      List<Record> findedRecords = recordService.findbyEmployeeEmail(employeeEmail);
+      return new ResponseEntity<>(findedRecords, HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
   }
 
   // Post (save) a new record

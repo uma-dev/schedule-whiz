@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { getRecordsByEmployeeId } from "../../services/recordService";
 import { Record } from "../../types/Record";
 import Card from "../common/Card";
 import useAuth from "../../hooks/useAuth";
+import { getRecordsByEmployeeEmail } from "../../services/getRecordsByEmployeeEmail";
 
-interface Props {
-  employeeId: number;
-}
-
-const SecondaryPanel = ({ employeeId }: Props) => {
+const SecondaryPanel = () => {
   const [records, setRecords] = useState<Record[]>([]);
-  const { token } = useAuth();
+  const { userEmail, token } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedRecords = await getRecordsByEmployeeId(employeeId, token);
+        const fetchedRecords = await getRecordsByEmployeeEmail(
+          userEmail,
+          token,
+        );
         setRecords(fetchedRecords);
       } catch (error) {
         console.error("Error fetching records:", error);
@@ -23,7 +22,7 @@ const SecondaryPanel = ({ employeeId }: Props) => {
     };
 
     fetchData();
-  }, [employeeId, token]);
+  }, [userEmail, token]);
 
   return (
     <div className="flex flex-col gap-10">

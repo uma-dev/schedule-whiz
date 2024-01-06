@@ -4,12 +4,11 @@ import SecondaryPanel from "../common/SecondaryPanel";
 import Grid from "../common/Grid";
 
 const Dashboard = () => {
-  const theEmployeeId = 6;
   return (
     <Grid>
       <Navbar />
-      <MainPanel employeeId={theEmployeeId} />
-      <SecondaryPanel employeeId={theEmployeeId} />
+      <MainPanel />
+      <SecondaryPanel />
     </Grid>
   );
 };

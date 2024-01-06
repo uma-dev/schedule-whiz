@@ -2,22 +2,18 @@ import Card from "../common/Card";
 import logo from "../../assets/images/logo.png";
 import { useEffect, useState } from "react";
 import { Employee } from "../../types/Employee";
-import { getEmployeeById } from "../../services/employeeService";
 import getDate from "../../services/getDate";
 import useAuth from "../../hooks/useAuth";
+import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
 
-interface Props {
-  employeeId: number;
-}
-
-const MainPanel = ({ employeeId }: Props) => {
+const MainPanel = () => {
   const [employee, setEmployee] = useState<Employee | null>(null);
-  const { token } = useAuth();
+  const { userEmail, token } = useAuth();
 
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const employeeData = await getEmployeeById(employeeId, token);
+        const employeeData = await getEmployeeByEmail(userEmail, token);
         setEmployee(employeeData);
       } catch (error) {
         console.error("Error fetching employee data:", error);
@@ -25,7 +21,7 @@ const MainPanel = ({ employeeId }: Props) => {
     };
 
     fetchEmployee();
-  }, [employeeId, token]);
+  }, [userEmail, token]);
 
   if (!employee) {
     return <div>Loading...</div>;

@@ -13,7 +13,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const LoginForm = () => {
-  const { isAuthenticated, login } = useAuth();
+  const { login } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,7 +65,7 @@ const LoginForm = () => {
       //clear state and controlled inputs
       //need value attrib on inputs for this
       const accessToken = response?.access_token;
-      login(accessToken);
+      login(accessToken, user);
       setUser("");
       setPwd("");
       navigate(from, { replace: true });

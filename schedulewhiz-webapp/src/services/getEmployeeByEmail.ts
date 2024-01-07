@@ -5,13 +5,18 @@ export const getEmployeeByEmail = async (
   employeeEmail: string | null,
   token: string | null,
 ): Promise<Employee> => {
-  const response = await api.get(
-    `/api/employees/search?employeeEmail=${employeeEmail}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  try {
+    const response = await api.get(
+      `/api/employees/search?employeeEmail=${employeeEmail}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    },
-  );
-  return response.data;
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in authentication:", error);
+    throw error;
+  }
 };

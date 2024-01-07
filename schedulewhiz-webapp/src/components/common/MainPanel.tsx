@@ -5,6 +5,7 @@ import { Employee } from "../../types/Employee";
 import getDate from "../../services/getDate";
 import useAuth from "../../hooks/useAuth";
 import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
+import { postRecord } from "../../services/postRecord";
 
 const MainPanel = () => {
   const [employee, setEmployee] = useState<Employee | null>(null);
@@ -12,12 +13,9 @@ const MainPanel = () => {
 
   useEffect(() => {
     const fetchEmployee = async () => {
-      try {
-        const employeeData = await getEmployeeByEmail(userEmail, token);
-        setEmployee(employeeData);
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-      }
+      const employeeData = await getEmployeeByEmail(userEmail, token);
+      setEmployee(employeeData);
+      postRecord(employeeData.id, token);
     };
 
     fetchEmployee();

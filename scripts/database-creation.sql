@@ -190,21 +190,18 @@ VALUES
 	('10:00 - 18:30', '09:30:00-06:00', '18:00:00-06:00', 2, 0);
 
 -- Add employees with a default schema
+-- Default password !Dd12345 for sample employees 
 
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, image_url, role, password, fk_schedule, fk_team)
 VALUES
- 	('John', 'Garcia', 'Anderson', 'email1@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 1),
-	('Susan', 'Doe', 'Smith', 'email2@gmail.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 3, 1);
+ 	('John', 'Garcia', 'Anderson', 'email1@example.com', 'https://www.pinclipart.com/picdir/middle/541-5416602_dummy-profile-image-url-clipart.png', 'USER', '$2a$10$jMydZ82zIQK/ncxNxrldWujvHLfwyISrq8c9nGuk5DXP2awYIT5ny', 2, 1);
 	
 
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, role, password, fk_schedule, fk_team)
 VALUES
-  	('William', 'Taylor', 'Lopez', 'email13@gmail.com', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 7),
-  	('David', 'Anderson', 'Gonzalez', 'email15@gmail.com', 'USER', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 5, 3);
+  	('William', 'Taylor', 'Lopez', 'email2@example.com', 'USER', '$2a$10$jMydZ82zIQK/ncxNxrldWujvHLfwyISrq8c9nGuk5DXP2awYIT5ny', 5, 7);
  
 -- Add managers
 INSERT INTO "schedule-whiz-v1"."Employees"(names, first_surname, second_surname, email, role, password, fk_team, fk_managed_team)
 VALUES
- 	('Jose', 'Smith', 'Smith', 'email27@gmail.com', 'ADMIN', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 1, 1),
- 	('Luis', 'White', 'White', 'email28@gmail.com', 'ADMIN', '$2a$10$nrWsmfGTNuMkuquX9gZq4OcromVIBKkajsCvlsWCJ7crDKc4kvuCW', 2, 2);
-
+ 	('Jose', 'Smith', 'Smith', 'email3@example.com', 'ADMIN', '$2a$10$jMydZ82zIQK/ncxNxrldWujvHLfwyISrq8c9nGuk5DXP2awYIT5ny', 1, 1);

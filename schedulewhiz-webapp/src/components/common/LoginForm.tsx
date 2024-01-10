@@ -7,7 +7,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { postAuth } from "../../services/postAuth";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
+import { postRecord } from "../../services/postRecord";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -23,7 +25,7 @@ const LoginForm = () => {
   const userRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
-  const [user, setUser] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
@@ -38,8 +40,8 @@ const LoginForm = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(EMAIL_REGEX.test(user));
-  }, [user]);
+    setValidName(EMAIL_REGEX.test(userEmail));
+  }, [userEmail]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -47,12 +49,12 @@ const LoginForm = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [userEmail, pwd]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const emailValidation = EMAIL_REGEX.test(user);
+    const emailValidation = EMAIL_REGEX.test(userEmail);
     const pwdValidation = PWD_REGEX.test(pwd);
 
     if (!emailValidation || !pwdValidation) {
@@ -61,13 +63,18 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await postAuth(user, pwd);
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
+      // Get access token
+      const response = await postAuth(userEmail, pwd);
       const accessToken = response?.access_token;
-      login(accessToken, user);
-      setUser("");
+      // Set user email and access token to authorize
+      login(accessToken, userEmail);
+      // Post a record every login, backend will validate hour and only one record each day
+      const employee = await getEmployeeByEmail(userEmail, accessToken);
+      postRecord(employee.id, accessToken);
+      //clear state and controlled inputs
+      setUserEmail("");
       setPwd("");
+      // Go to the path which user came from
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
@@ -104,8 +111,8 @@ const LoginForm = () => {
             required
             autoComplete="off"
             ref={userRef}
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            onChange={(e) => setUserEmail(e.target.value)}
+            value={userEmail}
             aria-invalid={validName ? "false" : "true"}
             aria-describedby="uidnote"
             onFocus={() => setUserFocus(true)}
@@ -124,14 +131,16 @@ const LoginForm = () => {
             <FontAwesomeIcon
               icon={faTimes}
               className={
-                validName || !user ? "hidden" : "visible text-red-400 ml-2"
+                validName || !userEmail ? "hidden" : "visible text-red-400 ml-2"
               }
             />
           </label>
           <p
             id="uidnote"
             className={
-              userFocus && user && !validName ? "visible text-xs" : "hidden"
+              userFocus && userEmail && !validName
+                ? "visible text-xs"
+                : "hidden"
             }
           >
             <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />

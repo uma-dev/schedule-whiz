@@ -6,13 +6,17 @@ export const postRecord = async (
   token: string | null,
 ): Promise<AuthResponse> => {
   try {
+    const now = new Date();
+    // Quit 6 hours for mexico city
+    now.setHours(now.getHours() - 6);
+
     const response = await api.post(
       "/api/records",
       {
         employee: { id: employeeId },
         schedule: { id: 3 },
         issue: null,
-        startTime: "2023-12-16T05:32:44.363+00:00",
+        startTime: now,
       },
       {
         headers: {

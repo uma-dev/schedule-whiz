@@ -61,12 +61,14 @@ public class RecordController {
   @PostMapping
   public ResponseEntity<?> saveRecord(@RequestBody Record theRecord) {
     try {
-      boolean employeeCannotPost =
-          !recordService.canUserSaveRecordToday(theRecord.getEmployee().getId());
+      Integer id = theRecord.getEmployee().getId();
 
-      if (employeeCannotPost) {
-        return new ResponseEntity<>("You can only post once a day", HttpStatus.BAD_REQUEST);
+      // Is the user posting only once a day?
+      if (recordService.isSavingRestricted(id)) {
+        return new ResponseEntity<>(
+            "You can only post once a day or 15 minutes after start time", HttpStatus.BAD_REQUEST);
       }
+
       // If the employee can post a record today:
       // Set the ID to zero/0 just in case it's different in the JSON.
       theRecord.setId(0);

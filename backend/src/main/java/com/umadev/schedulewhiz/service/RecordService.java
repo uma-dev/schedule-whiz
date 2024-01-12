@@ -9,7 +9,7 @@ public interface RecordService {
 
   List<Record> findbyEmployeeEmail(String employeeEmail);
 
-  boolean canUserSaveRecordToday(Integer employeeId);
+  boolean isSavingRestricted(Integer employeeId);
 
   Record saveRecord(Record theRecord);
 }

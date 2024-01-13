@@ -42,6 +42,8 @@ Here is a mockup of the user interface:
 - [ ] As a user I want to track my history.
 - [ ] As a employee I want to know my next week schedule.
 
+![Spring 2](./images/sprint-2.png)
+
 ## Getting Started
 
 To get started with this project, follow these steps:

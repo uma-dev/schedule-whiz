@@ -69,8 +69,7 @@ const LoginForm = () => {
       // Set user email and access token to authorize
       login(accessToken, userEmail);
       // Post a record every login, backend will validate hour and only one record each day
-      const employee = await getEmployeeByEmail(userEmail, accessToken);
-      postRecord(employee.id, accessToken);
+      postRecord(userEmail, accessToken);
       //clear state and controlled inputs
       setUserEmail("");
       setPwd("");

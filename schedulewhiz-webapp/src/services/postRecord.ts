@@ -1,20 +1,24 @@
 import api from "../api/axiosConfig";
 import { AuthResponse } from "../types/AuthResponse";
+import { getEmployeeByEmail } from "./getEmployeeByEmail";
 
 export const postRecord = async (
-  employeeId: number,
+  email: string,
   token: string | null,
 ): Promise<AuthResponse> => {
   try {
     const now = new Date();
-    // Quit 6 hours for mexico city
+    // Quit the hours of Time Zone in Mexico City
     now.setHours(now.getHours() - 6);
+
+    const theEmployee = await getEmployeeByEmail(email, token);
+    const theSchedule = theEmployee.schedule;
 
     const response = await api.post(
       "/api/records",
       {
-        employee: { id: employeeId },
-        schedule: { id: 3 },
+        employee: { id: theEmployee.id },
+        schedule: theSchedule,
         issue: null,
         startTime: now,
       },

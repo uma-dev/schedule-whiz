@@ -64,9 +64,14 @@ public class RecordController {
       Integer id = theRecord.getEmployee().getId();
 
       // Is the user posting only once a day?
-      if (recordService.isSavingRestricted(id)) {
+      if (recordService.isSavingRestrictedToday(id)) {
+        return new ResponseEntity<>("You can only post once a day", HttpStatus.BAD_REQUEST);
+      }
+
+      // Is the user posting within time?
+      if (recordService.isPostOutOfTime(theRecord)) {
         return new ResponseEntity<>(
-            "You can only post once a day or 15 minutes after start time", HttpStatus.BAD_REQUEST);
+            "You can only post 15 minutes after start time", HttpStatus.BAD_REQUEST);
       }
 
       // If the employee can post a record today:

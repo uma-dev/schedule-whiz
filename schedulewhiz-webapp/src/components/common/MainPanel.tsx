@@ -2,9 +2,9 @@ import Card from "../common/Card";
 import logo from "../../assets/images/logo.png";
 import { useEffect, useState } from "react";
 import { Employee } from "../../types/Employee";
-import getDate from "../../services/getDate";
 import useAuth from "../../hooks/useAuth";
 import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
+import RecordsCalendar from "./RecordsCalendar";
 
 const MainPanel = () => {
   const [employee, setEmployee] = useState<Employee | null>(null);
@@ -61,10 +61,7 @@ const MainPanel = () => {
         </div>
       </Card>
 
-      <div className="flex flex-col px-3 col-span-2 h-full">
-        <span className="text-xs">Today</span>
-        <span>{getDate()}</span>
-      </div>
+      <RecordsCalendar />
     </div>
   );
 };

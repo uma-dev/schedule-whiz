@@ -1,6 +1,7 @@
 import { useState } from "react";
 import getDate from "../../services/getDate";
 import Calendar from "react-calendar";
+import "./RecordsCalendar.css";
 
 const RecordsCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -13,13 +14,14 @@ const RecordsCalendar = () => {
     <div className="flex flex-col gap-4 px-3 col-span-2 ">
       <div className="flex flex-col ">
         <span className="text-xs">Today</span>
-        <span>{getDate()}</span>
       </div>
       <div className="flex justify-center ">
         <Calendar
           onChange={handleDateChange}
           value={date}
-          className="text-center"
+          className="records-calendar"
+          // Start the calendar with sunday
+          calendarType="US"
         />
       </div>
     </div>

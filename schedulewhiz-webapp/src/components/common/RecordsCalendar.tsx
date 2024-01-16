@@ -1,5 +1,4 @@
 import { useState } from "react";
-import getDate from "../../services/getDate";
 import Calendar from "react-calendar";
 import "./RecordsCalendar.css";
 
@@ -19,9 +18,8 @@ const RecordsCalendar = () => {
         <Calendar
           onChange={handleDateChange}
           value={date}
-          className="records-calendar"
           // Start the calendar with sunday
-          calendarType="US"
+          calendarType="gregory"
         />
       </div>
     </div>

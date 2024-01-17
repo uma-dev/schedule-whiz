@@ -10,18 +10,15 @@ const RecordsCalendar = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 px-3 col-span-2 ">
-      <div className="flex flex-col ">
-        <span className="text-xs">Today</span>
-      </div>
-      <div className="flex justify-center ">
-        <Calendar
-          onChange={handleDateChange}
-          value={date}
-          // Start the calendar with sunday
-          calendarType="gregory"
-        />
-      </div>
+    <div className="flex flex-col justify-center items-center col-span-2">
+      <span className="text-xs text-center">Today</span>
+      <Calendar
+        onChange={handleDateChange}
+        value={date}
+        // Start the calendar with sunday
+        calendarType="gregory"
+        className="react-calendar"
+      />
     </div>
   );
 };

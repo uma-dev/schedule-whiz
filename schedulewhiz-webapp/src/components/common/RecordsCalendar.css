@@ -1,6 +1,6 @@
 .react-calendar {
   /* width: 350px; */
-  max-width: 100%;
+  max-width: 600px;
   background: white;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
@@ -60,9 +60,9 @@
 }
 
 /* change label order that shows the day */
-.react-calendar__navigation__label {
-  order: -1;
-}
+/* .react-calendar__navigation__label { */
+/*   order: -1; */
+/* } */
 
 .react-calendar__month-view__weekdays {
   text-align: center;

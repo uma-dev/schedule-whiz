@@ -7,5 +7,5 @@ export interface Record {
   employee: Employee;
   schedule: Schedule;
   issue: Issue;
-  startTime: string;
+  startTime: Date;
 }

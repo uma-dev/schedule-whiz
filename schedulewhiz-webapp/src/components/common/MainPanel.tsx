@@ -61,7 +61,9 @@ const MainPanel = () => {
         </div>
       </Card>
 
-      <RecordsCalendar />
+      <div className="col-span-2 h-96">
+        <RecordsCalendar />
+      </div>
     </div>
   );
 };

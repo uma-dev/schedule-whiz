@@ -10,15 +10,8 @@ const SecondaryPanel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const fetchedRecords = await getRecordsByEmployeeEmail(
-          userEmail,
-          token,
-        );
-        setRecords(fetchedRecords);
-      } catch (error) {
-        console.error("Error fetching records:", error);
-      }
+      const fetchedRecords = await getRecordsByEmployeeEmail(userEmail, token);
+      setRecords(fetchedRecords);
     };
 
     fetchData();

@@ -24,7 +24,7 @@ const MainPanel = () => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-12">
+    <div className="grid grid-cols-2 gap-12 h-full">
       <Card color="my-grey col-span-2">
         <div className="flex flex-row items-center">
           <div className="w-full flex flex-col flex-1 min-w-fit gap-2">
@@ -61,7 +61,7 @@ const MainPanel = () => {
         </div>
       </Card>
 
-      <div className="col-span-2 h-96">
+      <div className="col-span-2" style={{ height: "55vh" }}>
         <RecordsCalendar />
       </div>
     </div>

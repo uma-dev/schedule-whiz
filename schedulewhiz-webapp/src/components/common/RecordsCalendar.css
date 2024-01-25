@@ -1,0 +1,46 @@
+.rbc-header {
+  /* background: #0c356a; */
+  /* color: white; */
+  padding: 10px;
+  font-size: 12px;
+}
+
+.rbc-event {
+  /* padding: 0px !important; */
+  /* border-radius: 0px !important; */
+  border: none !important;
+  /* background-color: transparent !important; */
+  background-color: green !important;
+  opacity: 0.6;
+  border-radius: 50% !important;
+  padding: 16px 0px !important;
+  width: 60%;
+  margin-left: 20%;
+  font-size: smaller;
+  text-align: center;
+}
+
+.rbc-background-event {
+  padding: 0px !important;
+  border-radius: 0px !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.rbc-time-slot {
+  background-color: #eaf3fa;
+  color: #74a4c3;
+  border-color: aqua !important;
+}
+
+.rbc-event-label {
+  display: none !important;
+}
+
+.rbc-events-container {
+  width: 100% !important;
+}
+
+.rbc-timeslot-group {
+  min-height: 120px !important;
+}

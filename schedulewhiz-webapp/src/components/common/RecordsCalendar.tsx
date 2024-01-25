@@ -5,12 +5,14 @@ import { getRecordsByEmployeeEmail } from "../../services/getRecordsByEmployeeEm
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { CalendarEvent } from "../../types/CalendarEvent";
+import "./RecordsCalendar.css";
 
 const localizer = momentLocalizer(moment);
 
 const RecordsCalendar = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const { userEmail, token } = useAuth();
+  const today = new Date();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +46,10 @@ const RecordsCalendar = () => {
       events={events}
       startAccessor="start"
       endAccessor="end"
+      // start time 7:00am
+      min={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8)}
+      // end time 6:00pm
+      max={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18)}
     />
   );
 };

@@ -61,11 +61,11 @@ To get started with this project, follow these steps:
 
 - Java JDK
 - Spring Boot
-- MySQL/PostgreSQL/your preferred database
+- MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing
 
-Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUTING.md).
+Contributions are welcome! 
 
 ## Task List
 

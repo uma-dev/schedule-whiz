@@ -2,7 +2,7 @@
 
 Progressive Schedule Optimization
 
-## Project Description
+## Description
 
 The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
 
@@ -60,12 +60,15 @@ To get started with this project, follow these steps:
 ## Prerequisites
 
 - Java JDK
-- Spring Boot
+  - Spring Boot
+- React
+  - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
+  - Tailwind 
 - MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing
 
-Contributions are welcome! 
+Contributions are welcome! Open your pull request.
 
 ## Task List
 

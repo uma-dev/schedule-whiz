@@ -54,16 +54,16 @@ To get started with this project, follow these steps:
 4. Run the Spring Boot application.
 5. Run the React webapp.
 6. Register your email.
-7. Access the application through a web browser.
-8. Begin optimizing schedules for your team!
+7. Access the application.
+8. Begin optimizing schedules!
 
 ## Prerequisites
 
 - Java JDK
   - Spring Boot
-- React
+- React with typescript
   - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
-  - Tailwind 
+  - Tailwind CSS
 - MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing

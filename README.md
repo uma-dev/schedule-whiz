@@ -39,7 +39,7 @@ Here is a mockup of the user interface:
 
 ## Sprint 2 (MVP part 2)
 
-- [ ] As a user I want to track my history.
+- [x] As a user I want to track my history.
 - [ ] As a employee I want to know my next week schedule.
 
 ![Spring 2](./images/sprint-2.png)
@@ -59,11 +59,11 @@ To get started with this project, follow these steps:
 
 - Java JDK
 - Spring Boot
-- MySQL/PostgreSQL/your preferred database
+- MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing
 
-Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUTING.md).
+Contributions are welcome! 
 
 ## Task List
 

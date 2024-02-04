@@ -31,8 +31,12 @@ const RecordsCalendar = () => {
         // new object that represents events in react calendar
         // compare if record whats in time or early
         return start < end
-          ? new CalendarEvent(start, end, <i class="bx bx-check"></i>)
-          : new CalendarEvent(end, start, "Early :)");
+          ? new CalendarEvent(start, end, <i class="bx bx-check bx-sm"></i>)
+          : new CalendarEvent(
+              end,
+              start,
+              <i class="bx bx-check bx-sm bx-burst"></i>,
+            );
       });
       setEvents(events);
     };

@@ -2,7 +2,7 @@
 
 Progressive Schedule Optimization
 
-## Project Description
+## Description
 
 The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
 
@@ -39,7 +39,7 @@ Here is a mockup of the user interface:
 
 ## Sprint 2 (MVP part 2)
 
-- [ ] As a user I want to track my history.
+- [x] As a user I want to track my history.
 - [ ] As a employee I want to know my next week schedule.
 
 ![Spring 2](./images/sprint-2.png)
@@ -52,18 +52,23 @@ To get started with this project, follow these steps:
 2. Setup the database with the provided DDL in `/scripts` folder (PostgreSQL).
 3. Configure your database settings in `application.properties` and `env.properties` (see `env.properties.example`).
 4. Run the Spring Boot application.
-5. Access the application through a web browser.
-6. Begin optimizing schedules for your team!
+5. Run the React webapp.
+6. Register your email.
+7. Access the application.
+8. Begin optimizing schedules!
 
 ## Prerequisites
 
 - Java JDK
-- Spring Boot
-- MySQL/PostgreSQL/your preferred database
+  - Spring Boot
+- React with typescript
+  - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
+  - Tailwind CSS
+- MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing
 
-Contributions are welcome! Please follow the [Contributing Guidelines](CONTRIBUTING.md).
+Contributions are welcome! Open your pull request.
 
 ## Task List
 

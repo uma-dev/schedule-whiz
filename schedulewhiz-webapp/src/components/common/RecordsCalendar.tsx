@@ -18,10 +18,11 @@ const RecordsCalendar = () => {
     const fetchData = async () => {
       const records = await getRecordsByEmployeeEmail(userEmail, token);
       const events: CalendarEvent[] = records.map((r) => {
+        // End
         // adjust zone -6 in mexico
         const end = new Date(r.startTime);
         end.setHours(end.getHours() + 6);
-        // end
+        // Start
         const year = end.getFullYear();
         const month = end.getMonth();
         const day = end.getDate();
@@ -29,14 +30,7 @@ const RecordsCalendar = () => {
         const minutes: number = +r.schedule.startTime.substring(3, 5);
         const start = new Date(year, month, day, hour, minutes);
         // new object that represents events in react calendar
-        // compare if record whats in time or early
-        return start < end
-          ? new CalendarEvent(start, end, <i class="bx bx-check bx-sm"></i>)
-          : new CalendarEvent(
-              end,
-              start,
-              <i class="bx bx-check bx-sm bx-burst"></i>,
-            );
+        return new CalendarEvent(start, end);
       });
       setEvents(events);
     };
@@ -54,6 +48,13 @@ const RecordsCalendar = () => {
       min={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8)}
       // end time 6:00pm
       max={new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18)}
+      eventPropGetter={(myEventsList) => {
+        const backgroundColor = myEventsList.colorEvento
+          ? myEventsList.colorEvento
+          : // Default color if no property is present
+            "green";
+        return { style: { backgroundColor } };
+      }}
     />
   );
 };

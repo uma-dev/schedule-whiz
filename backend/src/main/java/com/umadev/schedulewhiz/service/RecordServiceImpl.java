@@ -47,7 +47,7 @@ public class RecordServiceImpl implements RecordService {
   public boolean isPostOutOfTime(Record record) {
     OffsetTime newRecordTime = record.getStartTime().toOffsetTime();
     OffsetTime startTime = record.getSchedule().getStartTime();
-    int tolerance = 20; // minutes
+    int tolerance = 60; // minutes
     Duration delay = Duration.between(startTime, newRecordTime);
     return delay.toMinutes() > tolerance;
   }

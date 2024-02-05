@@ -32,10 +32,13 @@ public class TeamController {
   @GetMapping("/search")
   public ResponseEntity<?> findByName(@RequestParam(name = "name") String team) {
     try {
-      if (team == null) return ResponseEntity.badRequest().body("Team name cannot be empty.");
+      if (team == null) {
+        return ResponseEntity.badRequest().body("Team name cannot be empty.");
+      }
       Optional<Team> findedTeam = teamService.findByName(team);
-      if (findedTeam.isEmpty())
+      if (findedTeam.isEmpty()) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Team not found.");
+      }
       return new ResponseEntity<>(findedTeam, HttpStatus.OK);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -46,10 +49,13 @@ public class TeamController {
   @GetMapping("/{teamId}")
   public ResponseEntity<?> findById(@PathVariable("teamId") Integer theId) {
     try {
-      if (theId <= 0) return ResponseEntity.badRequest().body("Team ID cannot be negative.");
+      if (theId <= 0) {
+        return ResponseEntity.badRequest().body("Team ID cannot be negative.");
+      }
       Optional<Team> findedTeam = teamService.findById(theId);
-      if (findedTeam.isEmpty())
+      if (findedTeam.isEmpty()) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Team not found.");
+      }
       return new ResponseEntity<>(findedTeam, HttpStatus.OK);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -15,13 +15,8 @@ export class CalendarEvent {
       this.end = endTime;
     }
 
-    // const iconCheck = <i class="bx bx-check bx-sm"></i>;
-    // const iconX = <i class="bx bx-x bx-sm"></i>;
-    // compare if record was in time or late
-    // elapsed is a timestamp
     const elapsed = endTime.getTime() - startTime.getTime();
     const delayInMinutes = Math.round(elapsed / 1000 / 60);
-    console.log(delayInMinutes);
     const tolerance = 15;
 
     if (delayInMinutes < tolerance) {

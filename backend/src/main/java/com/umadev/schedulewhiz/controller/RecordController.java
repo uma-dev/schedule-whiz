@@ -69,9 +69,16 @@ public class RecordController {
       }
 
       // Is the user posting within time?
-      if (recordService.isPostOutOfTime(theRecord)) {
+      if (recordService.isPostedOutOfTime(theRecord)) {
         return new ResponseEntity<>(
-            "You can only post 15 minutes after start time", HttpStatus.BAD_REQUEST);
+            "You can only post up to 60 minutes after your start time", HttpStatus.BAD_REQUEST);
+      }
+
+      // Is the user posting before expected?
+      if (recordService.isPostedBeforeExpectedTime(theRecord)) {
+        return new ResponseEntity<>(
+            "You can only post up to 60 minutes earlier than your start time",
+            HttpStatus.BAD_REQUEST);
       }
 
       // If the employee can post a record today:

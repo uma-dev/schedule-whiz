@@ -44,12 +44,20 @@ public class RecordServiceImpl implements RecordService {
   }
 
   @Override
-  public boolean isPostOutOfTime(Record record) {
-    OffsetTime newRecordTime = record.getStartTime().toOffsetTime();
+  public boolean isPostedOutOfTime(Record record) {
+    OffsetTime postedTime = record.getStartTime().toOffsetTime();
     OffsetTime startTime = record.getSchedule().getStartTime();
     int tolerance = 60; // minutes
-    Duration delay = Duration.between(startTime, newRecordTime);
-    return delay.toMinutes() > tolerance;
+    return Duration.between(startTime, postedTime).toMinutes() > tolerance;
+  }
+
+  @Override
+  public boolean isPostedBeforeExpectedTime(Record record) {
+    OffsetTime postedTime = record.getStartTime().toOffsetTime();
+    OffsetTime startTime = record.getSchedule().getStartTime();
+    int tolerance = -60; // minutes
+    // Try to post more than one hour after start time
+    return Duration.between(startTime, postedTime).toMinutes() < tolerance;
   }
 
   @Override

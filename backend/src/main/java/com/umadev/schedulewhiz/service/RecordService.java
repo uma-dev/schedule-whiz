@@ -11,7 +11,9 @@ public interface RecordService {
 
   boolean isSavingRestrictedToday(Integer employeeId);
 
-  boolean isPostOutOfTime(Record record);
+  boolean isPostedOutOfTime(Record record);
+
+  boolean isPostedBeforeExpectedTime(Record record);
 
   Record saveRecord(Record theRecord);
 }

@@ -77,8 +77,7 @@ Contributions are welcome! Open your pull request.
 - [x] Implement user authentication.
 - [ ] Design the scheduling algorithm.
 - [x] Develop the user interface.
-- [ ] Integrate flexibility and remote work features.
-- [ ] Test and optimize the system.
+- [ ] Clean the code.
 - [ ] Document the project.
 - [ ] Deployment and production-ready setup.
 

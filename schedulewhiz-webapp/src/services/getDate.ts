@@ -2,7 +2,7 @@ const getDate = () => {
   const today = new Date();
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   };
 

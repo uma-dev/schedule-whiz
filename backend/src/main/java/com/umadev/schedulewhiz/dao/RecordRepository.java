@@ -21,7 +21,10 @@ public interface RecordRepository extends JpaRepository<Record, Integer> {
       select count(r) from Record r
       where r.employee.email = :employeeEmail
       and MONTH(r.startTime) = :month
+      and YEAR(r.startTime) = :year
       """)
   int findByEmployeeEmailAndMonth(
-      @Param("employeeEmail") String employeeEmail, @Param("month") int month);
+      @Param("employeeEmail") String employeeEmail,
+      @Param("month") int month,
+      @Param("year") int year);
 }

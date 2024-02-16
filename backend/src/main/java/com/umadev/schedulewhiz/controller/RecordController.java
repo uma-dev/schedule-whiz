@@ -60,7 +60,8 @@ public class RecordController {
   @GetMapping("/searchbymonth")
   public ResponseEntity<?> getRecordsOfTheMonthbyEmployeeEmail(
       @RequestParam(name = "employeeEmail") String employeeEmail,
-      @RequestParam(name = "month") int month) {
+      @RequestParam(name = "month") int month,
+      @RequestParam(name = "year") int year) {
     try {
       if (employeeEmail == null) {
         return ResponseEntity.badRequest().body("Employee email cannot be empty.");
@@ -68,7 +69,8 @@ public class RecordController {
       if (month < 1 || month > 12) {
         return ResponseEntity.badRequest().body("Month invalid.");
       }
-      int findedRecordsOfTheMonth = recordService.findbyEmployeeEmailAndMonth(employeeEmail, month);
+      int findedRecordsOfTheMonth =
+          recordService.findbyEmployeeEmailAndMonth(employeeEmail, month, year);
       return new ResponseEntity<>(findedRecordsOfTheMonth, HttpStatus.OK);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

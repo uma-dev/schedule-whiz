@@ -57,6 +57,25 @@ public class RecordController {
     }
   }
 
+  @GetMapping("/searchbymonth")
+  public ResponseEntity<?> getRecordsOfTheMonthbyEmployeeEmail(
+      @RequestParam(name = "employeeEmail") String employeeEmail,
+      @RequestParam(name = "month") int month) {
+    try {
+      if (employeeEmail == null) {
+        return ResponseEntity.badRequest().body("Employee email cannot be empty.");
+      }
+      if (month < 1 || month > 12) {
+        return ResponseEntity.badRequest().body("Month invalid.");
+      }
+      int findedRecordsOfTheMonth = recordService.findbyEmployeeEmailAndMonth(employeeEmail, month);
+      return new ResponseEntity<>(findedRecordsOfTheMonth, HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
+  }
+
   // Post (save) a new record
   @PostMapping
   public ResponseEntity<?> saveRecord(@RequestBody Record theRecord) {

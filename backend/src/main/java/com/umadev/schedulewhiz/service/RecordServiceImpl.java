@@ -26,6 +26,11 @@ public class RecordServiceImpl implements RecordService {
   }
 
   @Override
+  public int findbyEmployeeEmailAndMonth(String employeeEmail, int month) {
+    return recordRepository.findByEmployeeEmailAndMonth(employeeEmail, month);
+  }
+
+  @Override
   public List<Record> findbyEmployeeId(Integer recordId) {
     return recordRepository.findByEmployeeId(recordId);
   }

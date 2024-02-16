@@ -9,6 +9,8 @@ public interface RecordService {
 
   List<Record> findbyEmployeeEmail(String employeeEmail);
 
+  int findbyEmployeeEmailAndMonth(String employeeEmail, int month);
+
   boolean isSavingRestrictedToday(Integer employeeId);
 
   boolean isPostedOutOfTime(Record record);

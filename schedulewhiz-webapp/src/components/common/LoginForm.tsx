@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { postAuth } from "../../services/postAuth";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
 import { postRecord } from "../../services/postRecord";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -66,8 +65,9 @@ const LoginForm = () => {
       // Get access token
       const response = await postAuth(userEmail, pwd);
       const accessToken = response?.access_token;
+      const refreshToken = response?.refresh_token;
       // Set user email and access token to authorize
-      login(accessToken, userEmail);
+      login(accessToken, refreshToken, userEmail);
       // Post a record every login, backend will validate hour and only one record each day
       postRecord(userEmail, accessToken);
       //clear state and controlled inputs

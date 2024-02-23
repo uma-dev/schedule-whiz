@@ -9,21 +9,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
 
-  // @Value("${application.security.jwt.secret-key}")
-  private String secretKey = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+  @Value("${application.security.jwt.secret-key}")
+  private String secretKey;
 
-  // @Value("${application.security.jwt.expiration}")
-  // private long jwtExpiration = 86400000;
-  private long jwtExpiration = 10000;
+  @Value("${application.security.jwt.expiration}")
+  private long jwtExpiration;
 
-  // @Value("${application.security.jwt.refresh-token.expiration}")
-  private long refreshExpiration = 604800000;
+  @Value("${application.security.jwt.refresh-token.expiration}")
+  private long refreshExpiration;
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);

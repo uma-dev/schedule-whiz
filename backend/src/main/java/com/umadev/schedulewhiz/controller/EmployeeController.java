@@ -2,6 +2,7 @@ package com.umadev.schedulewhiz.controller;
 
 import com.umadev.schedulewhiz.entity.Employee;
 import com.umadev.schedulewhiz.service.EmployeeService;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/employees")
-@CrossOrigin(origins = "http://192.168.3.110:5173")
+@CrossOrigin(
+    allowCredentials = "true",
+    origins = "http://192.168.3.110:5173",
+    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class EmployeeController {
 
   private EmployeeService employeeService;
@@ -41,6 +47,17 @@ public class EmployeeController {
             .body("Failed to save the employee.");
       }
       return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
+  }
+
+  @GetMapping
+  public ResponseEntity<?> findall() {
+    try {
+      List<Employee> findedEmployees = employeeService.findAll();
+      return new ResponseEntity<>(findedEmployees, HttpStatus.OK);
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .body("An unexpected error occurred.");

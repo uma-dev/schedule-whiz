@@ -14,7 +14,6 @@ export const postAuth = async (
         withCredentials: true,
       },
     );
-
     return response.data;
   } catch (error) {
     console.error("Error in authentication:", error);

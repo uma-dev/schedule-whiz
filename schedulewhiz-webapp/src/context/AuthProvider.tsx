@@ -4,9 +4,11 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 interface AuthContextProps {
   isAuthenticated: boolean;
   token: string | null;
+  tokenForRefresh: string | null;
   userEmail: string | null;
-  login: (token: string, userEmail: string) => void;
+  login: (token: string, refreshToken: string, userEmail: string) => void;
   logout: () => void;
+  setRefreshToken: (token: string) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -18,6 +20,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [tokenForRefresh, setTokenForRefresh] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
@@ -25,17 +28,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const isAuthenticated = token !== null;
 
     setToken(isAuthenticated ? token : null);
+    setTokenForRefresh(isAuthenticated ? tokenForRefresh : null);
     setUserEmail(userEmail);
-  }, [token, userEmail]);
+  }, [token, tokenForRefresh, userEmail]);
 
-  const login = (newToken: string, userEmail: string) => {
+  const login = (newToken: string, refreshToken: string, userEmail: string) => {
     setToken(newToken);
+    setTokenForRefresh(refreshToken);
     setUserEmail(userEmail);
   };
 
   const logout = () => {
     setToken(null);
+    setTokenForRefresh(null);
     setUserEmail(null);
+  };
+
+  const setRefreshToken = (newToken: string) => {
+    setToken(newToken);
   };
 
   return (
@@ -43,9 +53,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       value={{
         isAuthenticated: token !== null,
         token,
+        tokenForRefresh,
         userEmail,
         login,
         logout,
+        setRefreshToken,
       }}
     >
       {children}

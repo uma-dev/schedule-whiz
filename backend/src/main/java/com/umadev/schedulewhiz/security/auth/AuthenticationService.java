@@ -110,7 +110,6 @@ public class AuthenticationService {
   public void refreshToken(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-    System.out.println(authHeader);
     final String refreshToken;
     final String userEmail;
     if (authHeader == null || !authHeader.startsWith("Bearer ")) {

@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,8 +46,6 @@ public class LoginController {
   @PostMapping("/refresh-token")
   public void refreshToken(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
-    System.out.println("  The request");
-    System.out.println(request.getHeader(HttpHeaders.AUTHORIZATION));
     service.refreshToken(request, response);
   }
 }

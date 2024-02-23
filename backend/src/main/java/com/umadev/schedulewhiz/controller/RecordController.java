@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/records")
-@CrossOrigin(origins = "http://192.168.3.110:5173")
+@CrossOrigin(
+    allowCredentials = "true",
+    origins = "http://192.168.3.110:5173",
+    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class RecordController {
 
   private RecordService recordService;

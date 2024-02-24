@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Card from "../common/Card";
 import useAuth from "../../hooks/useAuth";
 import { getNumRecordsByEmployeeEmailAndMonth } from "../../services/getNumRecordsByEmployeeEmailAndMonth";
-import Employees from "./Employees";
 
 const SecondaryPanel = () => {
   const [numOfRecords, setNumOfRecords] = useState<number>();

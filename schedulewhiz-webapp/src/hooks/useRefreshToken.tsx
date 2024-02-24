@@ -6,7 +6,6 @@ const useRefreshToken = () => {
 
   const refresh = async () => {
     const response = await getRefreshToken(tokenForRefresh);
-    console.log(response);
 
     setRefreshToken((prev) => {
       console.log(JSON.stringify(prev));

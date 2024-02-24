@@ -26,11 +26,8 @@ const useApiPrivate = () => {
       // error handler, for example: token expired
       async (error) => {
         const prevRequest = error?.config;
-        console.log("prev request: ");
-        console.log(prevRequest);
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          console.log(prevRequest);
           // Get the new access token by request to "/api/auth/refresh-token"
           const newAccessToken = await refresh();
           console.log("new access token");

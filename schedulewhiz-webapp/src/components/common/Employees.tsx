@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import useAuth from "../../hooks/useAuth";
 import { Employee } from "../../types/Employee";
 import useApiPrivate from "../../hooks/useApiPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Employees = () => {
   const [employees, setEmployees] = useState<Employee[] | null>();
   const apiPrivate = useApiPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // only run in  component load, empty dependency array
   useEffect(() => {
@@ -18,11 +20,15 @@ const Employees = () => {
         const response = await apiPrivate.get("/api/employees", {
           signal: controller.signal,
         });
-        console.log("The response");
-        console.log(response.data);
         isMounted && setEmployees(response.data);
       } catch (err) {
+        // if the refresh token expires
+        // go to authentication and save the route to return back where you where
         console.error(err);
+        navigate("/authentication", {
+          state: { from: location },
+          replace: true,
+        });
       }
     };
 

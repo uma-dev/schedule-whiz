@@ -3,21 +3,28 @@ import logo from "../../assets/images/logo.png";
 import { useEffect, useState } from "react";
 import { Employee } from "../../types/Employee";
 import useAuth from "../../hooks/useAuth";
-import { getEmployeeByEmail } from "../../services/getEmployeeByEmail";
 import RecordsCalendar from "./RecordsCalendar";
+import useApiPrivate from "../../hooks/useApiPrivate";
 
 const MainPanel = () => {
   const [employee, setEmployee] = useState<Employee | null>(null);
-  const { userEmail, token } = useAuth();
+  const { userEmail } = useAuth();
+  const apiPrivate = useApiPrivate();
 
   useEffect(() => {
     const fetchEmployee = async () => {
-      const employeeData = await getEmployeeByEmail(userEmail, token);
-      setEmployee(employeeData);
+      try {
+        const employeeData = await apiPrivate.get(
+          `/api/employees/search?employeeEmail=${userEmail}`,
+        );
+        setEmployee(employeeData.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchEmployee();
-  }, [userEmail, token]);
+  }, [apiPrivate, userEmail]);
 
   if (!employee) {
     return <div>Loading...</div>;

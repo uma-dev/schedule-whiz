@@ -1,10 +1,22 @@
 # Schedule Whiz
 
-Progressive Schedule Optimization
+The Schedule optimization tool for managing your and your teams assistance.
 
 ## Description
 
 The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
+
+## Backend Features
+- JWT security
+- Service Layer
+- Access token and refresh token
+- Time restrictions for endpoints
+
+## Frontend Features
+- Protected routes (React router)
+- JWT expiration proof axios config
+- Login and regiter forms
+- Calendar support
 
 ## Backlog
 

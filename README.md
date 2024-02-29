@@ -6,6 +6,35 @@ The Schedule optimization tool for managing your and your teams assistance.
 
 The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
 
+## Running locally
+
+Clone the repo first and navigate to the main directory.
+
+Make sure you nave `node` and `npm`, then execute:
+
+```
+# Install the dependencies
+npm install
+```
+
+## Developing
+
+Run the app and write your changes:
+
+```
+# Start the dev server
+npm run dev -- --host
+```
+
+## Building
+
+Create the production version:
+
+```
+npm run build
+# You can preview the production build with npm run preview.
+```
+
 ## Backend Features
 - JWT security
 - Service Layer

@@ -7,14 +7,28 @@ The Schedule optimization tool for managing your and your teams assistance.
 The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
 
 ## Running locally
-
 Clone the repo first and navigate to the main directory.
 
+### Database
+Exceute the PostgreSQL DDL provided in `./scripts`. 
+
+### Frontend
+Navigate to `schedulewhiz-app/`.
 Make sure you nave `node` and `npm`, then execute:
 
 ```
 # Install the dependencies
 npm install
+```
+
+### Backend
+Navigate to `backend/`.
+Create `env.properties` file using as example the `evn.properties.example`. Ensure that the username, url and password match wit your database. 
+Make sure you nave `mvn`, then execute:
+
+```
+# Run the backend
+mvn clean && mvn package && mvn spring-boot:run
 ```
 
 ## Developing

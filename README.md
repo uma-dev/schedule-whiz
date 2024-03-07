@@ -31,7 +31,7 @@ Create `env.properties` file using as example the `evn.properties.example`. Ensu
 Make sure you nave `mvn`, then execute:
 
 ```
-# Install the dependencies
+# Clean the previous output and compile
 mvn clean && mvn package
 ```
 

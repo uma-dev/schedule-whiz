@@ -42,8 +42,8 @@ npm install
 
 1. Navigate to `backend/`.
 2. Create `env.properties` configuration file. Your can use as example the `evn.properties.example`.
-3. Ensure that the username, url and password match wit your database.
-   Make sure you nave `mvn`, then execute:
+3. Ensure that the username, url and password match with your database.
+   Make sure you have `mvn`, then execute:
 
 ```
 # Clean the previous output and compile

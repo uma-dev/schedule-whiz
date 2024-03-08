@@ -60,8 +60,8 @@ mvn spring-boot:run
 Create the production version:
 
 ```
-npm run build
 # You can preview the production build with npm run preview.
+npm run build
 ```
 
 ## Backend Features
@@ -76,7 +76,7 @@ npm run build
 
 - Protected routes (React router)
 - JWT expiration proof axios config
-- Login and regiter forms
+- Login and register forms
 - Calendar support
 
 ## Backlog
@@ -134,7 +134,7 @@ To get started with this project, follow these steps:
 
 - Java JDK
   - Spring Boot
-- React with typescript
+- React with TypeScript
   - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
   - Tailwind CSS
 - MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)

@@ -11,6 +11,15 @@ environments and helping track assistance records.
 This Spring Boot Java application will guide you through the
 process of optimizing schedules for teams in dynamic work settings.
 
+## Prerequisites
+
+- Java JDK
+  - Spring Boot
+- React with TypeScript
+  - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
+  - Tailwind CSS
+- PostgreSQL/MySQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
+
 ## Running locally
 
 Clone the repo first and navigate to the main directory.
@@ -21,8 +30,8 @@ Exceute the PostgreSQL DDL provided in `./scripts`.
 
 ### Frontend
 
-Navigate to `schedulewhiz-app/`.
-Make sure you nave `node` and `npm`, then execute:
+1. Navigate to `schedulewhiz-app/`.
+2. Make sure you nave `node` and `npm`, then execute:
 
 ```
 # Install the dependencies
@@ -31,9 +40,10 @@ npm install
 
 ### Backend
 
-Navigate to `backend/`.
-Create `env.properties` file using as example the `evn.properties.example`. Ensure that the username, url and password match wit your database.
-Make sure you nave `mvn`, then execute:
+1. Navigate to `backend/`.
+2. Create `env.properties` configuration file. Your can use as example the `evn.properties.example`.
+3. Ensure that the username, url and password match wit your database.
+   Make sure you nave `mvn`, then execute:
 
 ```
 # Clean the previous output and compile
@@ -134,15 +144,6 @@ To get started with this project, follow these steps:
 6. Register your email.
 7. Access the application.
 8. Begin optimizing schedules!
-
-## Prerequisites
-
-- Java JDK
-  - Spring Boot
-- React with TypeScript
-  - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
-  - Tailwind CSS
-- MySQL/PostgreSQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Contributing
 

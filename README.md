@@ -22,7 +22,7 @@ process of optimizing schedules for teams in dynamic work settings.
 
 ## Running locally
 
-Clone the repo first and navigate to the main directory.
+Clone the repo and navigate to the main directory.
 
 ### Database
 
@@ -69,6 +69,8 @@ Run the backend REST API:
 # Start the backend server
 mvn spring-boot:run
 ```
+
+\*\* you need to clean and recompile every change
 
 ## Building
 

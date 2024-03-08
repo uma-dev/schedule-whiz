@@ -1,10 +1,15 @@
 # Schedule Whiz
 
-The Schedule optimization tool for managing your and your teams assistance.
+The Schedule optimization tool for managing you and your teams schedule.
 
 ## Description
 
-The Progressive Schedule Optimization project is aimed at designing an assistance system to help teams find the best schedule in flexible and remote work environments. This Spring Boot Java application will guide you through the process of optimizing schedules for teams in dynamic work settings.
+Schedule Optimization project aimed at designing an assistance system
+to help teams find the best schedule in flexible and remote work
+environments and helping track assistance records.
+
+This Spring Boot Java application will guide you through the
+process of optimizing schedules for teams in dynamic work settings.
 
 ## Running locally
 

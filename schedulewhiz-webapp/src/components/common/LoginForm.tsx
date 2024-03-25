@@ -51,8 +51,8 @@ const LoginForm = () => {
   }, [userEmail, pwd]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
     // if button enabled with JS hack
+    e.preventDefault();
     const emailValidation = EMAIL_REGEX.test(userEmail);
     const pwdValidation = PWD_REGEX.test(pwd);
 

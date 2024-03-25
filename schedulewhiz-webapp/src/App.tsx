@@ -4,6 +4,7 @@ import MyTeam from "./components/pages/MyTeam";
 import Authentication from "./components/pages/Authentication";
 import RequireAuth from "./components/common/RequireAuth";
 import Missing from "./components/common/Missing";
+import PersistLogin from "./components/common/PersistLogin";
 
 function App() {
   return (
@@ -13,9 +14,11 @@ function App() {
         <Route path="/authentication" element={<Authentication />} />
 
         {/* Protected routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/my-team" element={<MyTeam />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/my-team" element={<MyTeam />} />
+          </Route>
         </Route>
 
         {/* Catch all */}

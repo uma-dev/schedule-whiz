@@ -88,6 +88,7 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDraweProps) => {
             leftIcon={isUploaded ? <IoCheckmark /> : <IoCloudUploadOutline />}
             onClick={handleUpload}
             size="md"
+            background="yellow"
           >
             {isUploaded ? "Uploaded" : "Upload"}
           </Button>

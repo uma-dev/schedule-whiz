@@ -21,7 +21,15 @@ import {
   MenuList,
   useColorMode,
 } from "@chakra-ui/react";
-import { IoMenu, IoPeople, IoTimer, IoMoon, IoSunny } from "react-icons/io5";
+import {
+  IoMenu,
+  IoPeople,
+  IoTimer,
+  IoExitOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
 
 import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
@@ -193,16 +201,23 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue("white", "gray.700")}
               borderColor={useColorModeValue("gray.100", "surfaceDark")}
             >
-              <MenuItem onClick={toggleDrawer}>
+              <MenuItem onClick={toggleDrawer} justifyContent="space-between">
                 Profile
+                <IoSettingsOutline />
                 <ProfileDrawer isOpen={isDrawerOpen} onClose={toggleDrawer} />
               </MenuItem>
-              <MenuItem onClick={toggleColorMode} gap={2}>
+              <MenuItem
+                onClick={toggleColorMode}
+                justifyContent="space-between"
+              >
                 Theme
-                {useColorModeValue(<IoMoon />, <IoSunny />)}
+                {useColorModeValue(<IoMoonOutline />, <IoSunnyOutline />)}
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+              <MenuItem onClick={handleSignOut} justifyContent="space-between">
+                Sign out
+                <IoExitOutline />
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

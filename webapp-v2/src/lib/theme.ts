@@ -1,9 +1,9 @@
 import { extendTheme } from "@chakra-ui/react";
-import { color } from "framer-motion";
 
 const theme = extendTheme({
   fonts: {
-    heading: "Montserrat, sans-serif", // Change the font family for headings
+    heading: "Roboto, sans-serif", // Change the font family for headings
+    body: "Roboto, sans-serif", // Change the font family for headings
   },
   fontWeights: {
     bold: 700, // Custom font weight for bold text
@@ -16,6 +16,14 @@ const theme = extendTheme({
         },
       },
     },
+  },
+
+  colors: {
+    blue: "#0C356A",
+    yellow: "#EBB200",
+    backgroundLight: "#FDFDFD",
+    backgroundDark: "#222222",
+    surfaceDark: "#1D1D1D",
   },
 });
 

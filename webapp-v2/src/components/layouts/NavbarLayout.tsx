@@ -26,7 +26,7 @@ import { IoMenu, IoPeople, IoTimer, IoMoon, IoSunny } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 interface LinkItemProps {
   name: string;
@@ -58,7 +58,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
       transition="2s ease"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("white", "surfaceDark")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: 60 }}
@@ -68,7 +68,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h={20} alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontWeight="bold">
-          ScheduleWhiz
+          Schedule
+          <Text as="span" color="yellow">
+            Whiz
+          </Text>
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -93,21 +96,11 @@ const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
-          color: "white",
+          bg: useColorModeValue("yellow", "gray.700"),
         }}
         {...rest}
       >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
+        {icon && <Icon mr="4" fontSize="18" _groupHover={{}} as={icon} />}
         {children}
       </Flex>
     </Link>
@@ -116,13 +109,22 @@ const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { toggleColorMode } = useColorMode();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    // Clear authentication data (e.g., tokens, session)
+    // Update user authentication state
+    // Redirect user to login page
+    navigate("/login");
+  };
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("white", "surfaceDark")}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
       justifyContent={{ base: "space-between", md: "flex-end" }}
@@ -168,7 +170,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2"
                 >
                   <Text fontSize="sm">The user name</Text>
-                  <Text fontSize="xs" color="gray.600">
+                  <Text
+                    fontSize="xs"
+                    color={useColorModeValue("black", "white")}
+                  >
                     Admin
                   </Text>
                 </VStack>
@@ -178,8 +183,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               </HStack>
             </MenuButton>
             <MenuList
-              bg={useColorModeValue("white", "gray.900")}
-              borderColor={useColorModeValue("gray.200", "gray.700")}
+              bg={useColorModeValue("white", "gray.700")}
+              borderColor={useColorModeValue("gray.200", "surfaceDark")}
             >
               <MenuItem>Profile</MenuItem>
               <MenuItem onClick={toggleColorMode} gap={2}>
@@ -187,7 +192,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 {useColorModeValue(<IoMoon />, <IoSunny />)}
               </MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -200,7 +205,10 @@ const NavbarLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box
+      minH="100vh"
+      bg={useColorModeValue("backgroundLight", "backgroundDark")}
+    >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}

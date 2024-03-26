@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Team from "./components/Team";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import NextSchedule from "./components/NextSchedule";
 import { Routes, Route } from "react-router-dom";
 import NavbarLayout from "./components/layouts/NavbarLayout";
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       {/* Public routes */}
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* Protected routes */}
       {/* <Route element={<PersistLogin />}> */}

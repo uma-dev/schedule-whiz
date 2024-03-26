@@ -19,8 +19,9 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  useColorMode,
 } from "@chakra-ui/react";
-import { IoMenu, IoPeople, IoTimer } from "react-icons/io5";
+import { IoMenu, IoPeople, IoTimer, IoMoon, IoSunny } from "react-icons/io5";
 
 import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
@@ -114,6 +115,7 @@ const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { toggleColorMode } = useColorMode();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -142,13 +144,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         Logo
       </Text>
 
-      <HStack spacing={{ base: "0", md: "6" }}>
+      <HStack spacing={{ base: "0", md: "4" }}>
         <IconButton
           size="lg"
           variant="ghost"
           aria-label="open menu"
           icon={<FiBell />}
         />
+
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
@@ -179,7 +182,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
+              <MenuItem onClick={toggleColorMode} gap={2}>
+                Theme
+                {useColorModeValue(<IoMoon />, <IoSunny />)}
+              </MenuItem>
               <MenuDivider />
               <MenuItem>Sign out</MenuItem>
             </MenuList>

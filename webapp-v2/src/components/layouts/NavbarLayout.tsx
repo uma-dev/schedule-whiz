@@ -27,6 +27,8 @@ import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import ProfileDrawer from "../ProfileDrawer";
+import { useState } from "react";
 
 interface LinkItemProps {
   name: string;
@@ -109,13 +111,18 @@ const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { toggleColorMode } = useColorMode();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Clear authentication data (e.g., tokens, session)
+    // Clear authentication data (tokens, session)
     // Update user authentication state
     // Redirect user to login page
     navigate("/login");
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen((isDrawerOpen) => !isDrawerOpen);
   };
 
   return (
@@ -186,7 +193,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue("white", "gray.700")}
               borderColor={useColorModeValue("gray.100", "surfaceDark")}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem onClick={toggleDrawer}>
+                Profile
+                <ProfileDrawer isOpen={isDrawerOpen} onClose={toggleDrawer} />
+              </MenuItem>
               <MenuItem onClick={toggleColorMode} gap={2}>
                 Theme
                 {useColorModeValue(<IoMoon />, <IoSunny />)}

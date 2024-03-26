@@ -60,7 +60,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       transition="2s ease"
       bg={useColorModeValue("white", "surfaceDark")}
       borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
+      borderRightColor={useColorModeValue("gray.100", "gray.700")}
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
@@ -124,9 +124,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue("white", "surfaceDark")}
+      bg={useColorModeValue("backgroundLight", "backgroundDark")}
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+      borderBottomColor={useColorModeValue("backgroundLight", "backgroundDark")}
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
@@ -184,7 +184,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             </MenuButton>
             <MenuList
               bg={useColorModeValue("white", "gray.700")}
-              borderColor={useColorModeValue("gray.200", "surfaceDark")}
+              borderColor={useColorModeValue("gray.100", "surfaceDark")}
             >
               <MenuItem>Profile</MenuItem>
               <MenuItem onClick={toggleColorMode} gap={2}>

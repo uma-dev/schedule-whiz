@@ -34,7 +34,7 @@ import {
 import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import ProfileDrawer from "../ProfileDrawer";
 import { useState } from "react";
 
@@ -121,6 +121,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { toggleColorMode } = useColorMode();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignOut = () => {
     // Clear authentication data (tokens, session)
@@ -158,7 +159,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontSize="2xl"
         fontWeight="bold"
       >
-        Logo
+        {/* The current name based on the path location */}
+        {location.pathname === "/dashboard"
+          ? "Dashboard"
+          : location.pathname === "/team"
+            ? "Team"
+            : location.pathname === "/next-schedule"
+              ? "Next schedule"
+              : "Schedule Whiz"}
       </Text>
 
       <HStack spacing={{ base: "0", md: "4" }}>
@@ -200,6 +208,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue("white", "gray.700")}
               borderColor={useColorModeValue("gray.100", "surfaceDark")}
+              // Display in front of other elements
+              zIndex="999"
             >
               <MenuItem onClick={toggleDrawer} justifyContent="space-between">
                 Profile
@@ -233,6 +243,7 @@ const NavbarLayout = () => {
     <Box
       minH="100vh"
       bg={useColorModeValue("backgroundLight", "backgroundDark")}
+      h="full"
     >
       <SidebarContent
         onClose={() => onClose}
@@ -252,7 +263,7 @@ const NavbarLayout = () => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }}>
         {/* Get the content of the path selected on app.tsx  */}
         <Outlet />
       </Box>

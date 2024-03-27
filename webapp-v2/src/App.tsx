@@ -1,5 +1,3 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import Dashboard from "./components/Dashboard";
 import Team from "./components/Team";
 import NotFound from "./components/NotFound";

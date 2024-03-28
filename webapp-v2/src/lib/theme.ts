@@ -13,6 +13,7 @@ const theme = extendTheme({
       variants: {
         "section-title": {
           marginTop: 3,
+          display: { base: "none", md: "block" },
         },
       },
     },

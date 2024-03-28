@@ -1,5 +1,3 @@
-import { Calendar, momentLocalizer, Views } from "react-big-calendar";
-import moment from "moment";
 import {
   Card,
   CardBody,
@@ -13,8 +11,7 @@ import {
 } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { IoCalendarOutline, IoFastFoodOutline } from "react-icons/io5";
-
-const localizer = momentLocalizer(moment);
+import RecordsCalendar from "./calendar/RecordsCalendar";
 
 function Dashboard() {
   return (
@@ -27,9 +24,7 @@ function Dashboard() {
       gap={6}
       mx="auto"
     >
-      <Heading variant="section-title" display={{ base: "none", md: "block" }}>
-        Dashboard
-      </Heading>
+      <Heading variant="section-title">Dashboard</Heading>
 
       <HStack justifyContent="space-between">
         <Card
@@ -77,15 +72,7 @@ function Dashboard() {
         </Card>
       </HStack>
 
-      <Calendar
-        localizer={localizer}
-        defaultView={Views.MONTH}
-        min={moment("2024-03-10T07:00:00").toDate()} // start 7:00am
-        max={moment("2024-03-10T19:00:00").toDate()} // end   7:00pm
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: "65vh", minHeight: "400px" }}
-      />
+      <RecordsCalendar />
     </Flex>
   );
 }

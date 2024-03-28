@@ -1,0 +1,45 @@
+/* TOOLBAR */
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    to left,
+    #f7e65e,
+    #ebb200
+  ); /* Linear gradient background */
+
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-toolbar button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0;
+  padding: 4px;
+  transition: color 0.5s ease;
+}
+
+.custom-toolbar button:focus {
+  outline: none;
+}
+
+.custom-toolbar button:hover {
+  color: #007bcc;
+}
+
+/* HEADER */
+.rbc-header {
+  color: white;
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px !important;
+  background: #c1a10a;
+}

@@ -3,12 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(
-    to left,
-    #f7e65e,
-    #ebb200
-  ); /* Linear gradient background */
-
+  background: linear-gradient(to left, #f7e65e, #ebb200);
   padding: 10px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -33,7 +28,7 @@
   color: #007bcc;
 }
 
-/* HEADER */
+/* CALENDAR */
 .rbc-header {
   color: white;
   font-size: 14px !important;
@@ -42,4 +37,48 @@
   justify-content: center;
   height: 28px !important;
   background: #c1a10a;
+}
+
+.rbc-date-cell {
+  font-size: 12px;
+}
+
+/* ************* */
+/* DARK MODE*/
+/* ************* */
+
+/* TOOLBAR*/
+[data-theme="dark"] .custom-toolbar {
+  background: linear-gradient(to left, #1c1c1c, #01010a);
+}
+
+/* CALENDAR */
+[data-theme="dark"] .rbc-header {
+  background: #1a1a1a;
+  border-color: #202020;
+}
+
+[data-theme="dark"] .rbc-off-range-bg {
+  background: #393939;
+}
+
+[data-theme="dark"] .rbc-today {
+  background: #2d3748;
+}
+
+[data-theme="dark"] .rbc-day-bg {
+  border-color: #3f3f3f;
+}
+
+[data-theme="dark"] .rbc-month-view {
+  border-color: #1f1f1f; /* outside border */
+  background: #393939;
+}
+
+[data-theme="dark"] .rbc-month-row {
+  border-color: #505050;
+}
+
+[data-theme="dark"] .rbc-off-range {
+  color: #505050;
 }

@@ -6,28 +6,26 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 const localizer = momentLocalizer(moment);
 const currentDate = new Date().toLocaleDateString(undefined, {
   year: "numeric",
-  month: "short",
+  month: "long",
   day: "numeric",
 });
 
-const CustomToolbar = ({ label, onNavigate, onView }) => (
-  <div className="custom-toolbar">
-    <div>
-      <button onClick={() => onNavigate("PREV")}>
-        <IoChevronBack />
-      </button>
-      <button onClick={() => onNavigate("TODAY")}>Today</button>
-      <button onClick={() => onNavigate("NEXT")}>
-        <IoChevronForward />
-      </button>
+const CustomToolbar = ({ onNavigate, onView }) => {
+  return (
+    <div className="custom-toolbar">
+      <div>
+        <button onClick={() => onNavigate("PREV")}>
+          <IoChevronBack />
+        </button>
+        <button onClick={() => onNavigate("TODAY")}>Today</button>
+        <button onClick={() => onNavigate("NEXT")}>
+          <IoChevronForward />
+        </button>
+      </div>
+      <div>{currentDate}</div> {/* Display current date */}
     </div>
-    <div>{currentDate}</div> {/* Display current date */}
-    <div>
-      <button onClick={() => onView(Views.MONTH)}>Month</button>
-      <button onClick={() => onView(Views.WEEK)}>Week</button>
-    </div>
-  </div>
-);
+  );
+};
 
 const RecordsCalendar = () => {
   return (
@@ -37,7 +35,7 @@ const RecordsCalendar = () => {
         toolbar: CustomToolbar,
       }}
       defaultView={Views.MONTH}
-      views={[Views.MONTH, Views.WEEK]}
+      views={[Views.MONTH]}
       min={moment("2024-03-10T07:00:00").toDate()} // start 7:00am
       max={moment("2024-03-10T19:00:00").toDate()} // end   7:00pm
       startAccessor="start"

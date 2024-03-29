@@ -10,6 +10,7 @@ import {
   TagLabel,
   TagLeftIcon,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { IoCheckmark } from "react-icons/io5";
@@ -41,6 +42,7 @@ function NextSchedule() {
           border="none"
           align="center"
           boxShadow="lg"
+          bg={useColorModeValue("white", "#1a1a1a")}
         >
           <Image
             objectFit="cover"

@@ -1,4 +1,4 @@
-import { Flex, Heading, Select } from "@chakra-ui/react";
+import { Flex, Heading, Select, useColorModeValue } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import RecordsCalendar from "./calendar/RecordsCalendar";
 
@@ -14,7 +14,11 @@ function Team() {
       mx="auto"
     >
       <Heading variant="section-title">Team</Heading>
-      <Select placeholder="Select an member" variant="Flushed" bg="#f0eee1">
+      <Select
+        placeholder="Select an member"
+        variant="Flushed"
+        bg={useColorModeValue("#f0eee1", "#1a1a1a")}
+      >
         <option value="option1">Member 1</option>
         <option value="option1">Member 2</option>
         <option value="option1">Member 3</option>

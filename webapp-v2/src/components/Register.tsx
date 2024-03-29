@@ -87,7 +87,7 @@ function Register() {
                 <Button
                   loadingText="Submitting"
                   onClick={handleRegister}
-                  colorScheme="purple"
+                  background="yellow"
                 >
                   Register
                 </Button>

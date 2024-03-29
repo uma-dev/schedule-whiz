@@ -60,8 +60,8 @@ function Login() {
                   <Checkbox>Remember me</Checkbox>
                   {/* <Text color="cornflowerblue">Forgot password?</Text> */}
                 </Stack>
-                <Button onClick={handleLogin} colorScheme="purple">
-                  Sign in
+                <Button onClick={handleLogin} background="yellow">
+                  Login
                 </Button>
               </Stack>
               <Stack pt={4}>

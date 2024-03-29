@@ -67,7 +67,7 @@ const LinkItems: Array<LinkItemProps> = [
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
-      transition="2s ease"
+      transition="0.5s ease"
       bg={useColorModeValue("white", "surfaceDark")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.100", "gray.700")}
@@ -126,8 +126,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const handleSignOut = () => {
     // Clear authentication data (tokens, session)
     // Update user authentication state
-    // Redirect user to login page
-    navigate("/login");
+    // Redirect user to home page
+    navigate("/");
   };
 
   const toggleDrawer = () => {

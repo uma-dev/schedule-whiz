@@ -165,7 +165,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           : location.pathname === "/team"
             ? "Team"
             : location.pathname === "/next-schedule"
-              ? "Next schedule"
+              ? "Schedule"
               : "Schedule Whiz"}
       </Text>
 

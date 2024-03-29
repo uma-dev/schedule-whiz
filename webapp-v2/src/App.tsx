@@ -6,11 +6,13 @@ import Register from "./components/Register";
 import NextSchedule from "./components/NextSchedule";
 import { Routes, Route } from "react-router-dom";
 import NavbarLayout from "./components/layouts/NavbarLayout";
+import Home from "./components/Home";
 
 function App() {
   return (
     <Routes>
       {/* Public routes */}
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 

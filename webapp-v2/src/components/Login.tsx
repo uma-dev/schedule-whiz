@@ -15,6 +15,7 @@ import {
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,59 +27,66 @@ function Login() {
 
   return (
     <GradientDiv color={colorMode}>
-      <Flex minH={"85vh"} align={"center"} justify={"center"}>
-        <Stack spacing={6} mx={"auto"} minW={"sm"} maxW={"lg"} p={6}>
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"} textAlign="center">
-              Sign in
-            </Heading>
-            <Text fontSize={"lg"} color={"gray.400"}>
-              to your account
-            </Text>
-          </Stack>
-          <Box
-            rounded={"lg"}
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow={"lg"}
-            p={8}
-          >
-            <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input type="email" />
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <Input type="password" />
-              </FormControl>
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                  justify={"space-between"}
-                >
-                  <Checkbox>Remember me</Checkbox>
-                  {/* <Text color="cornflowerblue">Forgot password?</Text> */}
-                </Stack>
-                <Button onClick={handleLogin} background="yellow">
-                  Login
-                </Button>
-              </Stack>
-              <Stack pt={4}>
-                <Text fontSize="small" align={"center"}>
-                  Need an account?{" "}
-                  <Link
-                    color={"cornflowerblue"}
-                    onClick={() => navigate("/register")}
-                  >
-                    Register
-                  </Link>
-                </Text>
-              </Stack>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <Flex minH={"85vh"} align={"center"} justify={"center"}>
+          <Stack spacing={6} mx={"auto"} minW={"sm"} maxW={"lg"} p={6}>
+            <Stack align={"center"}>
+              <Heading fontSize={"4xl"} textAlign="center">
+                Sign in
+              </Heading>
+              <Text fontSize={"lg"} color={"gray.400"}>
+                to your account
+              </Text>
             </Stack>
-          </Box>
-        </Stack>
-      </Flex>
+            <Box
+              rounded={"lg"}
+              bg={useColorModeValue("white", "gray.700")}
+              boxShadow={"lg"}
+              p={8}
+            >
+              <Stack spacing={4}>
+                <FormControl id="email">
+                  <FormLabel>Email address</FormLabel>
+                  <Input type="email" />
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>Password</FormLabel>
+                  <Input type="password" />
+                </FormControl>
+                <Stack spacing={10}>
+                  <Stack
+                    direction={{ base: "column", sm: "row" }}
+                    align={"start"}
+                    justify={"space-between"}
+                  >
+                    <Checkbox>Remember me</Checkbox>
+                    {/* <Text color="cornflowerblue">Forgot password?</Text> */}
+                  </Stack>
+                  <Button onClick={handleLogin} background="yellow">
+                    Login
+                  </Button>
+                </Stack>
+                <Stack pt={4}>
+                  <Text fontSize="small" align={"center"}>
+                    Need an account?{" "}
+                    <Link
+                      color={"cornflowerblue"}
+                      onClick={() => navigate("/register")}
+                    >
+                      Register
+                    </Link>
+                  </Text>
+                </Stack>
+              </Stack>
+            </Box>
+          </Stack>
+        </Flex>
+      </motion.div>
     </GradientDiv>
   );
 }

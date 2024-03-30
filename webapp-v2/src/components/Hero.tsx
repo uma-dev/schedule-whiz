@@ -51,7 +51,7 @@ export default function Hero() {
         <Flex w={"full"} justify="center">
           <Image
             objectFit="cover"
-            src="/public/images/app.png"
+            src="/images/app.png"
             alt="Dan Abramov"
             width={{ sm: "400px", lg: "500px" }}
             mt={{ base: 1, sm: 4 }}

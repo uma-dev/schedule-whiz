@@ -54,7 +54,7 @@ function NextSchedule() {
             <Image
               objectFit="cover"
               maxW={{ base: "70%", sm: "300px" }}
-              src="/public/images/clock.png"
+              src="/images/clock.png"
               alt="Time"
               opacity={0.2}
               p={4}

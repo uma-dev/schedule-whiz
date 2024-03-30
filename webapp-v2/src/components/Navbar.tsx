@@ -20,6 +20,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import ThemeButton from "./ThemeButton";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -75,8 +76,9 @@ export default function Navbar() {
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
+          alignItems={"center"}
           direction={"row"}
-          spacing={6}
+          spacing={{ base: 2, md: 6 }}
         >
           <Button
             as={"a"}
@@ -84,6 +86,7 @@ export default function Navbar() {
             fontWeight={600}
             variant={"link"}
             href={"/login"}
+            px={1}
           >
             Sign In
           </Button>
@@ -91,14 +94,14 @@ export default function Navbar() {
             as={"a"}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
-            fontWeight={600}
             color={"white"}
             bg={"yellow"}
-            size="sm"
+            size="xs"
             href={"/register"}
           >
             Sign Up
           </Button>
+          <ThemeButton />
         </Stack>
       </Flex>
 

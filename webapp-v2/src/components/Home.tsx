@@ -5,7 +5,12 @@ import Footer from "./Footer";
 
 const Home = () => {
   return (
-    <Box>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      minHeight="100vh"
+    >
       <Navbar />
       <Hero />
       <Footer />

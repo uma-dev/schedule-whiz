@@ -16,7 +16,7 @@ export default function Hero() {
         textAlign={"center"}
         align={"center"}
         spacing={{ base: 8, md: 8 }}
-        py={{ base: 10, md: 20 }}
+        py={{ base: 10, md: 10 }}
       >
         <Heading
           fontWeight={600}
@@ -53,7 +53,7 @@ export default function Hero() {
             objectFit="cover"
             src="/public/images/app.png"
             alt="Dan Abramov"
-            width={{ sm: "400px", lg: "450px" }}
+            width={{ sm: "400px", lg: "500px" }}
             mt={{ base: 1, sm: 4 }}
           />
         </Flex>

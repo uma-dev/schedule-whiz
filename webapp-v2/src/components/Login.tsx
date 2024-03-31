@@ -72,7 +72,6 @@ function Login() {
       setErrMsg("Invalid Entry!");
       return;
     }
-    console.log(email, pwd);
 
     try {
       const response = await axios.post(
@@ -88,6 +87,8 @@ function Login() {
       // login(response.data.access_token, response.data.refresh_token, email);
       // Post a record every login, backend will validate hour and only one record each day
       // Go to the path which user came from
+      setEmail("");
+      setPwd("");
       navigate("/", { replace: true });
     } catch (err) {
       if (!err?.response) {

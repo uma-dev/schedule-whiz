@@ -19,9 +19,11 @@ import { motion } from "framer-motion";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useRef, useState } from "react";
 import { IoCheckmark, IoInformationCircleOutline } from "react-icons/io5";
+import axios from "../api/axios";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const LOGIN_URL = "/api/auth/authenticate";
 
 function Login() {
   const { colorMode } = useColorMode();
@@ -73,16 +75,28 @@ function Login() {
     console.log(email, pwd);
 
     try {
-      // Get access token
-      const accessToken = "accessToken";
-      const refreshToken = "accessToken";
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ email, password: pwd }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        },
+      );
+      console.log(response.data);
       // Set user email and access token to authorize
-      // login(accessToken, refreshToken, userEmail);
+      // login(response.data.access_token, response.data.refresh_token, email);
       // Post a record every login, backend will validate hour and only one record each day
       // Go to the path which user came from
       navigate("/", { replace: true });
     } catch (err) {
-      console.error(err);
+      if (!err?.response) {
+        setErrMsg("No Server response");
+      } // TODO add conditionals for specific error codes
+      else {
+        setErrMsg("Incorrect email or password");
+      }
+      errRef.current?.focus();
     }
   };
 
@@ -122,6 +136,7 @@ function Login() {
                   aria-live="assertive"
                   textAlign="center"
                   color="red.700"
+                  pb={4}
                 >
                   {errMsg}
                 </Text>
@@ -140,11 +155,12 @@ function Login() {
                   <Input
                     type="email"
                     name="floating_email"
-                    id="email"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="floating_email"
+                    placeholder=" "
                     required
+                    autoComplete="off"
+                    ref={userRef}
+                    onChange={(e) => setEmail(e.target.value)}
                     aria-invalid={validEmail ? "false" : "true"}
                     aria-describedby="uidnote"
                     onFocus={() => setEmailFocus(true)}

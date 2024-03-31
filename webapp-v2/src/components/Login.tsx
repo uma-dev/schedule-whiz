@@ -67,9 +67,10 @@ function Login() {
     const pwdValidation = PWD_REGEX.test(pwd);
 
     if (!emailValidation || !pwdValidation) {
-      setErrMsg("Invalid Entry");
+      setErrMsg("Invalid Entry!");
       return;
     }
+    console.log(email, pwd);
 
     try {
       // Get access token
@@ -79,7 +80,7 @@ function Login() {
       // login(accessToken, refreshToken, userEmail);
       // Post a record every login, backend will validate hour and only one record each day
       // Go to the path which user came from
-      navigate(from, { replace: true });
+      navigate("/", { replace: true });
     } catch (err) {
       console.error(err);
     }
@@ -115,13 +116,16 @@ function Login() {
               boxShadow={"lg"}
               p={8}
             >
-              <p
-                ref={errRef}
-                className={errMsg ? "errmsg" : "offscreen"}
-                aria-live="assertive"
-              >
-                {errMsg}
-              </p>
+              {errMsg && (
+                <Text
+                  ref={errRef}
+                  aria-live="assertive"
+                  textAlign="center"
+                  color="red.700"
+                >
+                  {errMsg}
+                </Text>
+              )}
               <Stack spacing={4}>
                 <FormControl id="email">
                   <FormLabel
@@ -210,6 +214,7 @@ function Login() {
                     </FormLabel>
                   )}
                 </FormControl>
+
                 <Stack spacing={10}>
                   <Stack
                     direction={{ base: "column", sm: "row" }}
@@ -219,10 +224,15 @@ function Login() {
                     <Checkbox>Remember me</Checkbox>
                     {/* <Text color="cornflowerblue">Forgot password?</Text> */}
                   </Stack>
-                  <Button onClick={handleLogin} background="yellow">
+                  <Button
+                    onClick={handleLogin}
+                    background="yellow"
+                    isDisabled={!validEmail || !validPwd ? true : false}
+                  >
                     Login
                   </Button>
                 </Stack>
+
                 <Stack pt={4}>
                   <Text fontSize="small" align={"center"}>
                     Need an account?{" "}

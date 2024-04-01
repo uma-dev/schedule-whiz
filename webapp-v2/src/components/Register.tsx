@@ -200,7 +200,7 @@ function Register() {
                     placeholder=" "
                     required
                     autoComplete="off"
-                    // ref={userRef}
+                    ref={userRef}
                     onChange={(e) => setNames(e.target.value)}
                     aria-invalid={validNames ? "false" : "true"}
                     aria-describedby="namesnote"
@@ -245,7 +245,6 @@ function Register() {
                         placeholder=" "
                         required
                         autoComplete="off"
-                        // ref={userRef}
                         onChange={(e) => setFirstSurname(e.target.value)}
                         aria-invalid={validFirstSurname ? "false" : "true"}
                         aria-describedby="surnamesnote"
@@ -272,7 +271,6 @@ function Register() {
                         placeholder=" "
                         required
                         autoComplete="off"
-                        // ref={userRef}
                         onChange={(e) => setSecondSurname(e.target.value)}
                         aria-invalid={validSecondSurname ? "false" : "true"}
                         aria-describedby="surnamesnote"
@@ -317,7 +315,6 @@ function Register() {
                     placeholder=" "
                     required
                     autoComplete="off"
-                    ref={userRef}
                     onChange={(e) => setEmail(e.target.value)}
                     aria-invalid={validEmail ? "false" : "true"}
                     aria-describedby="uidnote"

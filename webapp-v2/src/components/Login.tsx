@@ -1,62 +1,44 @@
 import { useLocation, useNavigate } from "react-router";
 import GradientDiv from "./GradientDiv";
 import {
-  Flex,
   Box,
+  Button,
+  Checkbox,
+  Flex,
   FormControl,
   FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Button,
   Heading,
-  Text,
+  Input,
   Link,
+  Stack,
+  Text,
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import useAuth from "../hooks/useAuth";
-import { useEffect, useRef, useState } from "react";
-import { IoCheckmark, IoInformationCircleOutline } from "react-icons/io5";
+import { useEffect, useRef, useState, useContext } from "react";
 import axios from "../api/axios";
+import AuthContext from "../context/AuthProvider";
 
-const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const LOGIN_URL = "/api/auth/authenticate";
 
 function Login() {
+  const { setAuth } = useContext(AuthContext);
   const { colorMode } = useColorMode();
-  // const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
-
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-
-  const [errMsg, setErrMsg] = useState("");
-
-  const userRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+
   useEffect(() => {
-    userRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
-
-  useEffect(() => {
-    setValidEmail(EMAIL_REGEX.test(email));
-  }, [email]);
-
-  useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-  }, [pwd]);
 
   useEffect(() => {
     setErrMsg("");
@@ -65,13 +47,6 @@ function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     // if button enabled with JS hack
     e.preventDefault();
-    const emailValidation = EMAIL_REGEX.test(email);
-    const pwdValidation = PWD_REGEX.test(pwd);
-
-    if (!emailValidation || !pwdValidation) {
-      setErrMsg("Invalid Entry!");
-      return;
-    }
 
     try {
       const response = await axios.post(
@@ -82,14 +57,16 @@ function Login() {
           withCredentials: true,
         },
       );
-      console.log(response.data);
-      // Set user email and access token to authorize
-      // login(response.data.access_token, response.data.refresh_token, email);
-      // Post a record every login, backend will validate hour and only one record each day
-      // Go to the path which user came from
-      setEmail("");
-      setPwd("");
-      navigate("/", { replace: true });
+
+      // Store access and refresh token and roles
+      const accessToken = response?.data?.access_token;
+      const refreshToken = response?.data?.refresh_token;
+      setAuth({ email, pwd, accessToken, refreshToken });
+      // Post a record every login
+      // Clear inputs and go to the path which user came from
+      // setEmail("");
+      // setPwd("");
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
@@ -151,39 +128,16 @@ function Login() {
                     gap={2}
                   >
                     Email address
-                    {validEmail && <IoCheckmark />}
                   </FormLabel>
                   <Input
                     type="email"
-                    name="floating_email"
                     id="floating_email"
-                    placeholder=" "
-                    required
+                    ref={emailRef}
                     autoComplete="off"
-                    ref={userRef}
                     onChange={(e) => setEmail(e.target.value)}
-                    aria-invalid={validEmail ? "false" : "true"}
-                    aria-describedby="uidnote"
-                    onFocus={() => setEmailFocus(true)}
-                    onBlur={() => setEmailFocus(false)}
+                    value={email}
+                    required
                   />
-
-                  {emailFocus && email && !validEmail && (
-                    <FormLabel
-                      id="uidnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="start"
-                      alignItems="center"
-                      py={1}
-                      color="red.700"
-                      fontSize={14}
-                    >
-                      <IoInformationCircleOutline />
-                      Must be a valid email address
-                    </FormLabel>
-                  )}
                 </FormControl>
 
                 <FormControl id="password">
@@ -194,42 +148,14 @@ function Login() {
                     gap={2}
                   >
                     Password
-                    {validPwd && <IoCheckmark />}
                   </FormLabel>
                   <Input
                     type="password"
-                    name="floating_password"
                     id="password"
-                    placeholder=" "
-                    required
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
-                    aria-invalid={validPwd ? "false" : "true"}
-                    aria-describedby="pwdnote"
-                    onFocus={() => setPwdFocus(true)}
-                    onBlur={() => setPwdFocus(false)}
+                    required
                   />
-                  {pwdFocus && !validPwd && (
-                    <FormLabel
-                      id="pwdnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="center"
-                      alignItems="start"
-                      py={1}
-                      color="red.700"
-                      fontSize={14}
-                      maxWidth="xs"
-                      pb={0}
-                    >
-                      <IoInformationCircleOutline size={28} />
-                      <Text>
-                        Must include upper and lower case letters, a number and
-                        a special character.
-                      </Text>
-                    </FormLabel>
-                  )}
                 </FormControl>
 
                 <Stack spacing={10}>
@@ -244,7 +170,7 @@ function Login() {
                   <Button
                     onClick={handleLogin}
                     background="yellow"
-                    isDisabled={!validEmail || !validPwd ? true : false}
+                    isDisabled={!email || !pwd ? true : false}
                   >
                     Login
                   </Button>

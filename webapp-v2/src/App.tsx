@@ -7,6 +7,7 @@ import NextSchedule from "./components/NextSchedule";
 import { Routes, Route } from "react-router-dom";
 import NavbarLayout from "./components/layouts/NavbarLayout";
 import Home from "./components/Home";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -18,13 +19,13 @@ function App() {
 
       {/* Protected routes */}
       {/* <Route element={<PersistLogin />}> */}
-      {/* <Route element={<RequireAuth />}> */}
-      <Route element={<NavbarLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/next-schedule" element={<NextSchedule />} />
+      <Route element={<RequireAuth />}>
+        <Route element={<NavbarLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/next-schedule" element={<NextSchedule />} />
+        </Route>
       </Route>
-      {/* </Route> */}
       {/* </Route> */}
 
       {/* Catch all non existing paths */}

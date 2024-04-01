@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from "react-router";
 import GradientDiv from "./GradientDiv";
 import {
   Box,
@@ -16,19 +15,20 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import axios from "../api/axios";
-import AuthContext from "../context/AuthProvider";
+import useAuth from "../hooks/useAuth";
 
 const LOGIN_URL = "/api/auth/authenticate";
 
 function Login() {
-  const { setAuth } = useContext(AuthContext);
   const { colorMode } = useColorMode();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/dashboard";
 
+  const { setAuth } = useAuth();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
@@ -64,8 +64,8 @@ function Login() {
       setAuth({ email, pwd, accessToken, refreshToken });
       // Post a record every login
       // Clear inputs and go to the path which user came from
-      // setEmail("");
-      // setPwd("");
+      setEmail("");
+      setPwd("");
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {

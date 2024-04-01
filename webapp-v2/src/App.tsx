@@ -20,10 +20,10 @@ function App() {
       {/* Protected routes */}
       {/* <Route element={<PersistLogin />}> */}
       <Route element={<RequireAuth />}>
-        <Route element={<NavbarLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/next-schedule" element={<NextSchedule />} />
+        <Route path="/" element={<NavbarLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="team" element={<Team />} />
+          <Route path="next-schedule" element={<NextSchedule />} />
         </Route>
       </Route>
       {/* </Route> */}

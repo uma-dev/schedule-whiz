@@ -12,4 +12,6 @@ public interface EmployeeService {
   Optional<Employee> getEmployeeById(Integer theId);
 
   Optional<Employee> findByEmail(String theEmail);
+
+  List<Employee> findByTeamId(Long theTeamId);
 }

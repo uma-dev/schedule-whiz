@@ -97,4 +97,18 @@ public class EmployeeController {
           .body("An unexpected error occurred.");
     }
   }
+
+  @GetMapping("/byTeam/{teamId}")
+  public ResponseEntity<?> findByTeamId(@PathVariable Long teamId) {
+    try {
+      if (teamId == null) {
+        return ResponseEntity.badRequest().body("Employee team id cannot be empty.");
+      }
+      List<Employee> findedEmployees = employeeService.findByTeamId(teamId);
+      return new ResponseEntity<>(findedEmployees, HttpStatus.OK);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body("An unexpected error occurred.");
+    }
+  }
 }

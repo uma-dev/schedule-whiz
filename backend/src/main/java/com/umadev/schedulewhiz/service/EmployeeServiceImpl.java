@@ -33,6 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
+  public List<Employee> findByTeamId(Long theTeamId) {
+    return employeeRepository.findByTeamId(theTeamId);
+  }
+
+  @Override
   public Optional<Employee> getEmployeeById(Integer theId) {
     return employeeRepository.findById(theId);
   }

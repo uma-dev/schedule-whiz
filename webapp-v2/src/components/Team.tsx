@@ -2,8 +2,46 @@ import { Flex, Heading, Select, useColorModeValue } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import RecordsCalendar from "./calendar/RecordsCalendar";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useLocation, useNavigate } from "react-router";
 
 function Team() {
+  const [employees, setEmployees] = useState();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    let isMounted = true;
+    const id = 1;
+    const controller = new AbortController();
+
+    const getEmployees = async () => {
+      try {
+        // TODO change url to include id
+        // axios Private will handle when access token need to be refresh
+        const response = await axiosPrivate.get(`/api/employees/byTeam/${id}`, {
+          signal: controller.signal,
+        });
+        isMounted && setEmployees(response.data);
+      } catch (err) {
+        console.error(err);
+        // when refresh token expires, go to login to get a new access token
+        if (err.response?.status === 403) {
+          navigate("/login", { state: { from: location }, replace: true });
+        }
+      }
+    };
+
+    getEmployees();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,15 +60,18 @@ function Team() {
       >
         <Heading variant="section-title">Team</Heading>
         <Select
-          placeholder="Select an member"
+          placeholder={employees?.length ? "Select an member" : "Empty team"}
+          isDisabled={!employees?.length}
           variant="Flushed"
           bg={useColorModeValue("#f0eee1", "#1a1a1a")}
         >
-          <option value="option1">Member 1</option>
-          <option value="option1">Member 2</option>
-          <option value="option1">Member 3</option>
+          {employees?.length > 0 &&
+            employees.map((employee) => (
+              <option key={employee?.id} value={employee?.id}>
+                {employee?.names}
+              </option>
+            ))}
         </Select>
-
         <RecordsCalendar />
       </Flex>
     </motion.div>

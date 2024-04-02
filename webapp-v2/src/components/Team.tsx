@@ -2,7 +2,7 @@ import { Flex, Heading, Select, useColorModeValue } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import RecordsCalendar from "./calendar/RecordsCalendar";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useLocation, useNavigate } from "react-router";
 
@@ -11,6 +11,8 @@ function Team() {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+  // state updated when your app is mounted the 2nd time
+  const effectRun = useRef(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -34,11 +36,15 @@ function Team() {
       }
     };
 
-    getEmployees();
+    // avoid canceledError for mounting twice (React strict mode)
+    if (effectRun.current) {
+      getEmployees();
+    }
 
     return () => {
       isMounted = false;
       controller.abort();
+      effectRun.current = true;
     };
   }, []);
 

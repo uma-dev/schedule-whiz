@@ -1,18 +1,19 @@
 import {
-  Flex,
   Box,
+  Button,
+  Flex,
   FormControl,
   FormLabel,
+  Heading,
+  HStack,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
+  Link,
+  Select,
   Stack,
-  Button,
-  Heading,
   Text,
   useColorModeValue,
-  Link,
   useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
@@ -23,9 +24,10 @@ import {
   IoInformationCircleOutline,
 } from "react-icons/io5";
 import GradientDiv from "./GradientDiv";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 const NAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
 const SURNAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
@@ -33,12 +35,34 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = "/api/auth/register";
 
-function Register() {
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
-  const { colorMode } = useColorMode();
+const ErrorMessage = ({ message }) => {
+  return (
+    <FormLabel
+      id="announcement"
+      display="flex"
+      flexDirection="row"
+      gap={2}
+      justifyContent="start"
+      alignItems="center"
+      pt={2}
+      color="red.700"
+      fontSize={14}
+      maxWidth="xs"
+    >
+      <IoInformationCircleOutline />
+      {message}
+    </FormLabel>
+  );
+};
 
-  const userRef = useRef<HTMLInputElement | null>(null);
+function Register() {
+  const { colorMode } = useColorMode();
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
+
+  const emailRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
   const [names, setNames] = useState("");
@@ -60,11 +84,15 @@ function Register() {
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
 
+  const [role, setRole] = useState("");
+  const [roleSelected, setRoleSelected] = useState(false);
+
   useEffect(() => {
-    userRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -90,6 +118,13 @@ function Register() {
   useEffect(() => {
     setErrMsg("");
   }, [email, pwd]);
+
+  const handleRoleChange = (e) => {
+    const selectedRole = e.target.value;
+    setRole(selectedRole);
+    // avoid remain true when diselect role
+    setRoleSelected(selectedRole !== "");
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,20 +155,24 @@ function Register() {
           firstSurname,
           secondSurname,
           password: pwd,
-          role: "USER",
+          role: role,
         }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         },
       );
-      console.log(response.data);
+      // Store access and refresh token and roles
+      const accessToken = response?.data?.access_token;
+      const refreshToken = response?.data?.refresh_token;
+      setAuth({ email, pwd, accessToken, refreshToken });
       //clear state and controlled inputs fields
       setEmail("");
       setNames("");
       setFirstSurname("");
       setSecondSurname("");
       setPwd("");
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
@@ -200,7 +239,7 @@ function Register() {
                     placeholder=" "
                     required
                     autoComplete="off"
-                    ref={userRef}
+                    ref={emailRef}
                     onChange={(e) => setNames(e.target.value)}
                     aria-invalid={validNames ? "false" : "true"}
                     aria-describedby="namesnote"
@@ -208,21 +247,8 @@ function Register() {
                     onBlur={() => setNamesFocus(false)}
                   />
 
-                  {namesFocus && !validNames && (
-                    <FormLabel
-                      id="namesnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="start"
-                      alignItems="center"
-                      pt={2}
-                      color="red.700"
-                      fontSize={14}
-                    >
-                      <IoInformationCircleOutline />
-                      Must be a valid name. Enter up to two names.
-                    </FormLabel>
+                  {namesFocus && !validNames && names && (
+                    <ErrorMessage message="Must be a valid name. Enter up to two names." />
                   )}
                 </FormControl>
 
@@ -263,6 +289,7 @@ function Register() {
                         gap={2}
                       >
                         Last Surname
+                        {validSecondSurname && <IoCheckmark />}
                       </FormLabel>
                       <Input
                         type="text"
@@ -280,25 +307,13 @@ function Register() {
                     </FormControl>
                   </Box>
                 </HStack>
-
                 {(firstSurnameFocus || secondSurnameFocus) &&
-                  (!validFirstSurname || !validSecondSurname) && (
-                    <FormLabel
-                      id="surnamesnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="start"
-                      alignItems="center"
-                      color="red.700"
-                      fontSize={14}
-                    >
-                      <IoInformationCircleOutline />
-                      Must be a valid surname.
-                    </FormLabel>
+                  (!validFirstSurname || !validSecondSurname) &&
+                  (firstSurname || secondSurname) && (
+                    <ErrorMessage message="Must be valid surnames." />
                   )}
 
-                <FormControl id="email">
+                <FormControl id="floating_email" isRequired>
                   <FormLabel
                     display="flex"
                     flexDirection="row"
@@ -323,22 +338,38 @@ function Register() {
                   />
 
                   {emailFocus && email && !validEmail && (
-                    <FormLabel
-                      id="uidnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="start"
-                      alignItems="center"
-                      py={1}
-                      color="red.700"
-                      pt={2}
-                      fontSize={14}
-                    >
-                      <IoInformationCircleOutline />
-                      Must be a valid email address
-                    </FormLabel>
+                    <ErrorMessage message="Must be a valid email address." />
                   )}
+                </FormControl>
+
+                <FormControl id="role_select" isRequired>
+                  <FormLabel
+                    display="flex"
+                    flexDirection="row"
+                    htmlFor="role_select"
+                    gap={2}
+                  >
+                    Role
+                    {roleSelected && <IoCheckmark />}
+                  </FormLabel>
+
+                  <Select
+                    isRequired
+                    placeholder="Select role"
+                    name="role_select"
+                    onChange={handleRoleChange}
+                  >
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                  </Select>
+
+                  {!roleSelected &&
+                    validNames &&
+                    validFirstSurname &&
+                    validSecondSurname &&
+                    validEmail && (
+                      <ErrorMessage message="Must select a role." />
+                    )}
                 </FormControl>
 
                 <FormControl id="password" isRequired>
@@ -369,6 +400,7 @@ function Register() {
                       <Button
                         variant={"ghost"}
                         size="xl"
+                        type="submit"
                         onClick={() =>
                           setShowPassword((showPassword) => !showPassword)
                         }
@@ -379,25 +411,10 @@ function Register() {
                   </InputGroup>
 
                   {pwdFocus && !validPwd && (
-                    <FormLabel
-                      id="pwdnote"
-                      display="flex"
-                      flexDirection="row"
-                      gap={2}
-                      justifyContent="center"
-                      alignItems="start"
-                      py={1}
-                      color="red.700"
-                      fontSize={14}
-                      maxWidth="xs"
-                      pb={0}
-                    >
-                      <IoInformationCircleOutline size={28} />
-                      <Text>
-                        Must include upper and lower case letters, a number and
-                        a special character.
-                      </Text>
-                    </FormLabel>
+                    <ErrorMessage
+                      message="8-24 chars: upper and lower case letters, a number and
+                        a special character !@#$%."
+                    />
                   )}
                 </FormControl>
 
@@ -409,6 +426,7 @@ function Register() {
                     isDisabled={
                       !validEmail ||
                       !validPwd ||
+                      !role ||
                       !validFirstSurname ||
                       !validSecondSurname
                         ? true

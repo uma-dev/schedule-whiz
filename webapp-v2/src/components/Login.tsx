@@ -24,11 +24,11 @@ const LOGIN_URL = "/api/auth/authenticate";
 
 function Login() {
   const { colorMode } = useColorMode();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const { setAuth } = useAuth();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 

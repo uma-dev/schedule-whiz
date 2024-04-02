@@ -61,7 +61,8 @@ function Login() {
       // Store access and refresh token and roles
       const accessToken = response?.data?.access_token;
       const refreshToken = response?.data?.refresh_token;
-      setAuth({ email, pwd, accessToken, refreshToken });
+      const userRole = response?.data?.role;
+      setAuth({ email, pwd, userRole, accessToken, refreshToken });
       // Post a record every login
       // Clear inputs and go to the path which user came from
       setEmail("");

@@ -165,7 +165,8 @@ function Register() {
       // Store access and refresh token and roles
       const accessToken = response?.data?.access_token;
       const refreshToken = response?.data?.refresh_token;
-      setAuth({ email, pwd, accessToken, refreshToken });
+      const userRole = response?.data?.role;
+      setAuth({ email, pwd, userRole, accessToken, refreshToken });
       //clear state and controlled inputs fields
       setEmail("");
       setNames("");

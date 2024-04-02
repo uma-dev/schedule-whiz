@@ -8,6 +8,14 @@ import { Routes, Route } from "react-router-dom";
 import NavbarLayout from "./components/layouts/NavbarLayout";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
+import Unauthorized from "./components/Unauthorized";
+
+// the array that specifies the role meaning in the response,
+// could be string => User: "USER" or code ex => User: 2000
+const ROLES = {
+  User: "USER",
+  Admin: "ADMIN",
+};
 
 function App() {
   return (
@@ -16,13 +24,22 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/unauthorized" element={<Unauthorized />} />
 
       {/* Protected routes */}
       {/* <Route element={<PersistLogin />}> */}
-      <Route element={<RequireAuth />}>
-        <Route path="/" element={<NavbarLayout />}>
+      <Route path="/" element={<NavbarLayout />}>
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+        >
           <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="team" element={<Team />} />
+        </Route>
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+        >
           <Route path="next-schedule" element={<NextSchedule />} />
         </Route>
       </Route>

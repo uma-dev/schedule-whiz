@@ -3,6 +3,7 @@ package com.umadev.schedulewhiz.security.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.umadev.schedulewhiz.dao.EmployeeRepository;
 import com.umadev.schedulewhiz.entity.Employee;
+import com.umadev.schedulewhiz.entity.Role;
 import com.umadev.schedulewhiz.security.config.JwtService;
 import com.umadev.schedulewhiz.security.token.Token;
 import com.umadev.schedulewhiz.security.token.TokenRepository;
@@ -68,11 +69,13 @@ public class AuthenticationService {
     Employee user = repository.findByEmail(request.getEmail()).orElseThrow();
     String jwtToken = jwtService.generateToken(user);
     String refreshToken = jwtService.generateRefreshToken(user);
+    Role role = user.getRole();
     revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
         .refreshToken(refreshToken)
+        .role(role)
         .build();
   }
 

@@ -1,6 +1,7 @@
 package com.umadev.schedulewhiz.security.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.umadev.schedulewhiz.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,7 @@ public class AuthenticationResponse {
 
   @JsonProperty("refresh_token")
   private String refreshToken;
+
+  @JsonProperty("role")
+  private Role role;
 }

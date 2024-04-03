@@ -37,11 +37,14 @@ import { MdDashboard } from "react-icons/md";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import ProfileDrawer from "../ProfileDrawer";
 import { useState } from "react";
+import { ROLES } from "../../lib/roles";
+import useAuth from "../../hooks/useAuth";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
   to: string;
+  roles: string[];
 }
 
 interface NavItemProps extends FlexProps {
@@ -59,12 +62,24 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Dashboard", icon: MdDashboard, to: "/dashboard" },
-  { name: "My Team", icon: IoPeople, to: "/team" },
-  { name: "Next schedule", icon: IoTimer, to: "/next-schedule" },
+  {
+    name: "Dashboard",
+    icon: MdDashboard,
+    to: "/dashboard",
+    roles: [ROLES.User, ROLES.Admin],
+  },
+  { name: "My Team", icon: IoPeople, to: "/team", roles: [ROLES.Admin] },
+  {
+    name: "Next schedule",
+    icon: IoTimer,
+    to: "/next-schedule",
+    roles: [ROLES.User, ROLES.Admin],
+  },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { auth } = useAuth();
+
   return (
     <Box
       transition="0.5s ease"
@@ -85,11 +100,14 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} to={link.to}>
-          {link.name}
-        </NavItem>
-      ))}
+      {LinkItems.map((link) =>
+        // Check if the link its allowed to be rendered
+        link.roles.includes(auth?.userRole) ? (
+          <NavItem key={link.name} icon={link.icon} to={link.to}>
+            {link.name}
+          </NavItem>
+        ) : null,
+      )}
     </Box>
   );
 };

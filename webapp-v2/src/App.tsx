@@ -9,13 +9,7 @@ import NavbarLayout from "./components/layouts/NavbarLayout";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
-
-// the array that specifies the role meaning in the response,
-// could be string => User: "USER" or code ex => User: 2000
-const ROLES = {
-  User: "USER",
-  Admin: "ADMIN",
-};
+import { ROLES } from "./lib/roles";
 
 function App() {
   return (

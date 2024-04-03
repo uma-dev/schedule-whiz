@@ -25,27 +25,27 @@ import org.springframework.web.bind.annotation.RestController;
     methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class LoginController {
 
-  private AuthenticationService service;
+  private AuthenticationService authenticationService;
 
   @Autowired
   public LoginController(AuthenticationService theService) {
-    this.service = theService;
+    this.authenticationService = theService;
   }
 
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
-    return ResponseEntity.ok(service.register(request));
+    return ResponseEntity.ok(authenticationService.register(request));
   }
 
   @PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request) {
-    return ResponseEntity.ok(service.authenticate(request));
+    return ResponseEntity.ok(authenticationService.authenticate(request));
   }
 
   @PostMapping("/refresh-token")
   public void refreshToken(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
-    service.refreshToken(request, response);
+    authenticationService.refreshToken(request, response);
   }
 }

@@ -71,7 +71,7 @@ function Login() {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server response");
-      } // TODO add conditionals for specific error codes
+      } // TODO: add conditionals for specific error codes
       else {
         setErrMsg("Incorrect email or password");
       }

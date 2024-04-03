@@ -21,7 +21,7 @@ function Team() {
 
     const getEmployees = async () => {
       try {
-        // TODO change url to include id
+        // TODO: change url to include id
         // axios Private will handle when access token need to be refresh
         const response = await axiosPrivate.get(`/api/employees/byTeam/${id}`, {
           signal: controller.signal,

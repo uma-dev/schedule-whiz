@@ -23,11 +23,11 @@ import {
   IoEyeOff,
   IoInformationCircleOutline,
 } from "react-icons/io5";
-import GradientDiv from "./GradientDiv";
 import { useLocation, useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import axios from "../api/axios";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/auth/useAuth";
+import axios from "../../api/axios";
+import GradientDiv from "../layouts/GradientDiv";
 
 const NAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
 const SURNAMES_REGEX = /^[A-Za-z]+(?: [A-Za-z]+)?$/;

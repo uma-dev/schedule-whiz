@@ -35,10 +35,10 @@ import { IconType } from "react-icons";
 import { FiBell, FiChevronDown } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import ProfileDrawer from "../ProfileDrawer";
+import ProfileDrawer from "./ProfileDrawer";
 import { useState } from "react";
 import { ROLES } from "../../lib/roles";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/auth/useAuth";
 
 interface LinkItemProps {
   name: string;

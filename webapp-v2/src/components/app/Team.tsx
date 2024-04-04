@@ -3,7 +3,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import RecordsCalendar from "./calendar/RecordsCalendar";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/data/useAxiosPrivate";
 import { useLocation, useNavigate } from "react-router";
 
 function Team() {

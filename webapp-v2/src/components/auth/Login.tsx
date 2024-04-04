@@ -1,4 +1,3 @@
-import GradientDiv from "./GradientDiv";
 import {
   Box,
   Button,
@@ -17,8 +16,9 @@ import {
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import axios from "../api/axios";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/auth/useAuth";
+import axios from "../../api/axios";
+import GradientDiv from "../layouts/GradientDiv";
 
 const LOGIN_URL = "/api/auth/authenticate";
 

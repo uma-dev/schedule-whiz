@@ -1,15 +1,15 @@
-import Dashboard from "./components/Dashboard";
-import Team from "./components/Team";
-import NotFound from "./components/NotFound";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import NextSchedule from "./components/NextSchedule";
+import Dashboard from "./components/app/Dashboard";
+import Team from "./components/app/Team";
+import NotFound from "./components/app/NotFound";
+import NextSchedule from "./components/app/NextSchedule";
 import { Routes, Route } from "react-router-dom";
 import NavbarLayout from "./components/layouts/NavbarLayout";
-import Home from "./components/Home";
-import RequireAuth from "./components/RequireAuth";
-import Unauthorized from "./components/Unauthorized";
+import Home from "./components/home/Home";
+import RequireAuth from "./components/auth/RequireAuth";
 import { ROLES } from "./lib/roles";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import Unauthorized from "./components/auth/Unauthorized";
 
 function App() {
   return (

@@ -10,7 +10,7 @@ const currentDate = new Date().toLocaleDateString(undefined, {
   day: "numeric",
 });
 
-const CustomToolbar = ({ onNavigate, onView }) => {
+const CustomToolbar = ({ onNavigate }) => {
   return (
     <div className="custom-toolbar">
       <div>

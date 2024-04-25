@@ -11,13 +11,13 @@ environments and helping track assistance records.
 This Spring Boot Java application will guide you through the
 process of optimizing schedules for teams in dynamic work settings.
 
-## Prerequisites
+## Stack
 
 - Java JDK
   - Spring Boot
 - React with TypeScript
   - [React Big calendar](https://www.npmjs.com/package/react-big-calendar)
-  - Tailwind CSS
+  - Chakra UI
 - PostgreSQL/MySQL/your preferred database (PostgreSQL DDL provided in `./scripts`)
 
 ## Running locally
